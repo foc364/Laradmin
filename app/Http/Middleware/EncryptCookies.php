@@ -1,6 +1,6 @@
 <?php
 
-namespace laradmin\Http\Middleware;
+namespace Larashop\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
 

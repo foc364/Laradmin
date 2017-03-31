@@ -1,9 +1,9 @@
 <?php
 
-namespace laradmin\Http\Controllers\Admin;
+namespace Larashop\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use laradmin\Http\Controllers\Controller;
+use Larashop\Http\Controllers\Controller;
 
 class OrdersController extends Controller
 {

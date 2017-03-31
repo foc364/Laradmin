@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(laradmin\User::class, function (Faker\Generator $faker) {
+$factory->define(Larashop\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [

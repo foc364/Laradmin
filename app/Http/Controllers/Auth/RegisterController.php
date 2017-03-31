@@ -1,9 +1,9 @@
 <?php
 
-namespace laradmin\Http\Controllers\Auth;
+namespace Larashop\Http\Controllers\Auth;
 
-use laradmin\User;
-use laradmin\Http\Controllers\Controller;
+use Larashop\User;
+use Larashop\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 

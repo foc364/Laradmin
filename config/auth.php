@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => laradmin\Models\User::class,
+            'model' => Larashop\Models\User::class,
         ],
 
         // 'users' => [

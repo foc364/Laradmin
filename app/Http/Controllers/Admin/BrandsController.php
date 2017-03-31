@@ -1,20 +1,28 @@
 <?php
 
-namespace laradmin\Http\Controllers\Admin;
+namespace Larashop\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use laradmin\Http\Controllers\Controller;
+use Larashop\Http\Controllers\Controller;
+use Larashop\Models\Brand;
 
 class BrandsController extends Controller
 {
-    /**
+      /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $brands = Brand::all();
+
+        $params = [
+            'title' => 'Brands Listing',
+            'brands' => $brands,
+        ];
+
+        return view('admin.brands.brands_list')->with($params);
     }
 
     /**
@@ -24,7 +32,7 @@ class BrandsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.brands.brands_create');
     }
 
     /**
@@ -35,7 +43,7 @@ class BrandsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->route('brands.index')->with('success', "The brand <strong>Brand</strong> has successfully been created.");
     }
 
     /**
@@ -46,7 +54,7 @@ class BrandsController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('admin.brands.brands_delete');
     }
 
     /**
@@ -57,7 +65,7 @@ class BrandsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.brands.brands_edit');
     }
 
     /**
@@ -69,7 +77,7 @@ class BrandsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return redirect()->route('brands.index')->with('success', "The brand <strong>Brand</strong> has successfully been updated.");
     }
 
     /**
@@ -80,6 +88,6 @@ class BrandsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return redirect()->route('brands.index')->with('success', "The brand <strong>Brand</strong> has successfully been archived.");
     }
 }

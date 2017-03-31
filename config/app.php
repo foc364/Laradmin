@@ -171,11 +171,11 @@ return [
         /*
          * Application Service Providers...
          */
-        laradmin\Providers\AppServiceProvider::class,
-        laradmin\Providers\AuthServiceProvider::class,
-        // laradmin\Providers\BroadcastServiceProvider::class,
-        laradmin\Providers\EventServiceProvider::class,
-        laradmin\Providers\RouteServiceProvider::class,
+        Larashop\Providers\AppServiceProvider::class,
+        Larashop\Providers\AuthServiceProvider::class,
+        // Larashop\Providers\BroadcastServiceProvider::class,
+        Larashop\Providers\EventServiceProvider::class,
+        Larashop\Providers\RouteServiceProvider::class,
 
     ],
 

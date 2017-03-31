@@ -1,6 +1,6 @@
 <?php
 
-namespace laradmin\Http\Middleware;
+namespace Larashop\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;

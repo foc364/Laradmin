@@ -1,6 +1,6 @@
 <?php
 
-namespace laradmin\Exceptions;
+namespace Larashop\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;

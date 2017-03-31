@@ -1,8 +1,8 @@
 <?php
 
-namespace laradmin\Http\Controllers\Auth;
+namespace Larashop\Http\Controllers\Auth;
 
-use laradmin\Http\Controllers\Controller;
+use Larashop\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
