@@ -43,7 +43,13 @@ class BrandsController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect()->route('brands.index')->with('success', "The brand <strong>Brand</strong> has successfully been created.");
+       
+        $brand = Brand::create([
+            'name' => $request->input('brand'),
+            'description' => $request->input('description'),
+        ]);
+
+        return redirect()->route('brands.index')->with('success', "The brand <strong>$brand->name</strong> has successfully been created.");
     }
 
     /**
