@@ -65,16 +65,7 @@
                         <div class="menu_section">
                             <ul class="nav side-menu">
                                 <li><a href="{{route('home')}}"><i class="fa fa-home"></i> Home </a></li>
-                                <li><a><i class="fa fa-edit"></i> Products <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="{{route('brands.index')}}">Brands list</a></li>
-                                        <li><a href="{{route('product-categories.index')}}">Categories</a></li>
-                                        <li><a href="{{route('products.index')}}">Products list</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="{{route('customers.index')}}"><i class="fa fa-user"></i> Customers </a></li>
-                                <li><a href="{{route('orders.index')}}"><i class="fa fa-shopping-cart"></i> Orders </a></li>
-                                <li><a href="{{route('usuarios.index')}}"><i class="fa fa-users"></i> Users </a></li>
+                                <li><a href="{{route('usuarios.index')}}"><i class="fa fa-users"></i> Usuários </a></li>
                             </ul>
                         </div>
                     </div>
@@ -82,16 +73,16 @@
 
                     <!-- /menu footer buttons -->
                     <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Settings">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        <a data-toggle="tooltip" data-placement="top" title="Home" href="{{route('home')}}">
+                            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="FullScreen">
                             <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Lock">
-                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        <a data-toggle="tooltip" data-placement="top" title="Usuários" href="{{route('usuarios.index')}}">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout">
+                        <a data-toggle="tooltip" data-placement="top" title="Sair" href="{{route('logout')}}">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>
                     </div>
@@ -114,8 +105,7 @@
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="#"> Profile</a></li>
-                                    <li><a href="#"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                    <li><a href="{{route('logout')}}"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
                                 </ul>
                             </li>
 
@@ -136,7 +126,7 @@
             <!-- footer content -->
             <footer>
                 <div class="pull-right">
-                    Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+                    Preseme Admin
                 </div>
                 <div class="clearfix"></div>
             </footer>
@@ -182,26 +172,7 @@
                     $("#datatable-buttons").DataTable({
                         dom: "Bfrtip",
                         buttons: [
-                        {
-                            extend: "copy",
-                            className: "btn-sm"
-                        },
-                        {
-                            extend: "csv",
-                            className: "btn-sm"
-                        },
-                        {
-                            extend: "excel",
-                            className: "btn-sm"
-                        },
-                        {
-                            extend: "pdfHtml5",
-                            className: "btn-sm"
-                        },
-                        {
-                            extend: "print",
-                            className: "btn-sm"
-                        },
+                       
                         ],
                         responsive: true
                     });
@@ -243,6 +214,7 @@
                 });
             });
             TableManageButtons.init();
+            $('#datatable-buttons_filter').hide();
         });
     </script>
     <!-- /Datatables -->
