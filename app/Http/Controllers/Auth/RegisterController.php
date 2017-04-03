@@ -2,7 +2,7 @@
 
 namespace Larashop\Http\Controllers\Auth;
 
-use Larashop\User;
+use Larashop\Models\User;
 use Larashop\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin/home';
 
     /**
      * Create a new controller instance.

@@ -2,8 +2,10 @@
 
 namespace Larashop\Http\Controllers\Admin;
 
+use Larashop\Models\User;
 use Illuminate\Http\Request;
 use Larashop\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UsersController extends Controller
 {
@@ -14,7 +16,14 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+
+        $params = [
+            'title' => 'Users Listing',
+            'users' => $users,
+        ];
+
+        return view('admin.users.users_list')->with($params);
     }
 
     /**
@@ -24,7 +33,11 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        $params = [
+            'title' => 'Criar Usuário',
+        ];
+
+        return view('admin.users.users_create')->with($params);
     }
 
     /**
@@ -35,7 +48,19 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:100',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|alpha_num|max:10',
+        ]);
+
+        $user = User::create([
+            'name' => ucfirst($request->input('name')),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+        ]);
+
+        return redirect()->route('usuarios.index')->with('success', "Usuário <strong>$user->name</strong> foi criado com sucesso.");
     }
 
     /**
@@ -46,7 +71,24 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        try
+        {
+            $user = User::findOrFail($id);
+
+            $params = [
+                'title' => 'Excluir usuário',
+                'user' => $user,
+            ];
+
+            return view('admin.users.users_delete')->with($params);
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 
     /**
@@ -57,9 +99,24 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
+        try
+        {
+            $user = User::findOrFail($id);
+            $params = [
+                'title' => 'Alterar Usuário',
+                'user' => $user,
+            ];
 
+            return view('admin.users.users_edit')->with($params);
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -69,9 +126,29 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        try
+        {
+            $user = User::findOrFail($id);
 
+            $this->validate($request, [
+                'name' => 'required|max:100',
+                'email' => 'required|email|unique:users,id,'.$id,
+            ]);
+
+            $user->name = ucfirst($request->input('name'));
+            $user->email = $request->input('email');
+            $user->save();
+
+            return redirect()->route('usuarios.index')->with('success', "Usuário <strong>$user->name</strong> foi alterado com sucesso.");
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -80,6 +157,20 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try
+        {
+            $user = User::findOrFail($id);
+
+            $user->delete();
+
+            return redirect()->route('usuarios.index')->with('success', "Usuário <strong>$user->name</strong> foi excluído com sucesso.");
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 }

@@ -8,34 +8,34 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Brands <a href="{{route('brands.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New </a></h2>
+                    <h2>Usuários <a href="{{route('usuarios.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Criar novo </a></h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>Brand</th>
-                                <th>Description</th>
-                                <th>Action</th>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Ação</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Brand</th>
-                                <th>Description</th>
-                                <th>Action</th>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Ação</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            @if (count($brands))
-                            @foreach($brands as $row)
+                            @if (count($users))
+                            @foreach($users as $row)
                             <tr>
                                 <td>{{$row->name}}</td>
-                                <td>{{$row->description}}</td>
+                                <td>{{$row->email}}</td>
                                 <td>
-                                    <a href="{{ route('.edit', ['id' => $row->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
-                                    <a href="{{ route('brands.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
+                                    <a href="{{ route('usuarios.edit', ['id' => $row->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Alterar"></i> </a>
+                                    <a href="{{ route('usuarios.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Excluir"></i> </a>
                                 </td>
                             </tr>
                             @endforeach

@@ -26,4 +26,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function firstName()
+    {
+        $firstName = explode(" ", $this->name);
+
+        return $firstName[0];
+    }
 }

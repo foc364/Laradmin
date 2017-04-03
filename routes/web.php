@@ -15,15 +15,32 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
     Route::resource('customers', 'CustomersController');
     Route::resource('brands', 'BrandsController');
     Route::resource('product-categories', 'ProductCategoriesController');
     Route::resource('products', 'ProductsController');
-    Route::resource('users', 'UsersController');
+    Route::resource('usuarios', 'UsersController');
 
     Route::get('orders', [
         'uses' => 'OrdersController@index',
         'as' => 'orders.index',
     ]);
+
+    Route::get('home', function () {
+        return view('admin.home');
+    })->name('home');
 });
+
+Route::group(['prefix' => 'admin'], function () {
+    Auth::routes();
+    
+   
+});
+
+Route::get('/admin', function () {
+    return redirect()->route('login');
+})->name('admin');
+
+
+
