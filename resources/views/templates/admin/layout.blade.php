@@ -30,6 +30,12 @@
     <link href="{{asset('resources/css/fixedHeader.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('resources/css/responsive.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('resources/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
+
+    <link href="{{asset('resources/date_picker/css/bootstrap-datepicker3.css')}}" rel="stylesheet">
+    <link href="{{asset('resources/date_picker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet">
+    <link href="{{asset('resources/date_picker/css/bootstrap-datepicker3.standalone.css')}}" rel="stylesheet">
+    <link href="{{asset('resources/date_picker/css/bootstrap-datepicker3.standalone.min.css')}}" rel="stylesheet">
+
 </head>
 
 <body class="nav-md">
@@ -66,6 +72,9 @@
                             <ul class="nav side-menu">
                                 <li><a href="{{route('home')}}"><i class="fa fa-home"></i> Home </a></li>
                                 <li><a href="{{route('usuarios.index')}}"><i class="fa fa-users"></i> Usuários </a></li>
+                                <li><a href="{{route('consultorios.index')}}"><i class="fa fa-building"></i> Consultórios </a></li>
+                                <li><a href="{{route('convenios.index')}}"><i class="fa fa-plus-square"></i> Convênios </a></li>
+                                <li><a href="{{route('agendamentos.index')}}"><i class="fa fa-calendar-check-o"></i> Agendamentos </a></li>
                             </ul>
                         </div>
                     </div>
@@ -160,6 +169,14 @@
     <script src="{{asset('resources/js/jszip.min.js')}}"></script>
     <script src="{{asset('resources/js/pdfmake.min.js')}}"></script>
     <script src="{{asset('resources/js/vfs_fonts.js')}}"></script>
+   
+
+    <script src="{{asset('resources/form_helper/js/bootstrap-formhelpers-phone.js')}}"></script>
+
+    <script src="{{asset('resources/date_picker/js/bootstrap-datepicker.js')}}"></script>
+    <script src="{{asset('resources/date_picker/js/bootstrap-datepicker.min.js')}}"></script>
+    
+
 
     <!-- Custom Theme Scripts -->
     <script src="{{asset('resources/js/custom.min.js')}}"></script>
@@ -167,6 +184,11 @@
     <!-- Datatables -->
     <script>
         $(document).ready(function() {
+
+            $('#sandbox-container .input-group.date').datepicker({
+                format: "dd/mm/yyyy"
+            });
+
             var handleDataTableButtons = function() {
                 if ($("#datatable-buttons").length) {
                     $("#datatable-buttons").DataTable({

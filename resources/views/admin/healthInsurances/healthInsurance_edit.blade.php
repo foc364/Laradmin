@@ -1,0 +1,56 @@
+@extends('templates.admin.layout')
+
+@section('content')
+<div class="">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>{{ $title }} <a href="{{route('convenios.index')}}" class="btn btn-info btn-xs"><i class="fa fa-chevron-left"></i> Voltar </a></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <br />
+                    <form method="post" action="{{ route('convenios.update', ['id' => $healthInsurance->id]) }}" data-parsley-validate class="form-horizontal form-label-left">
+
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6" for="name">Convênio <span class="required">* :</span>
+                            </label>
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <input type="text" maxlength="100" minlength="4" value="{{ Request::old('name') ?: $healthInsurance->name }}" id="name" name="name" class="form-control" required>
+                                @if ($errors->has('name'))
+                                <span class="help-block">{{ $errors->first('name') }}</span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('active') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6" for="active">Ativo :</label>
+
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label class="radio-inline">
+                                    <input type="radio" name="active" id="active1" value="1" {{ $healthInsurance->active ? 'checked' : ''}} > Sim
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="active" id="active2" value='0' {{ $healthInsurance->active ? '' : 'checked'}}> Não
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <input type="hidden" name="_token" value="{{ Session::token() }}">
+                                <input name="_method" type="hidden" value="PUT">
+                                <button type="submit" class="btn btn-success">{{ $title }}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@stop

@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
     Route::resource('usuarios', 'UsersController');
+    Route::resource('consultorios', 'PlacesController');
+    Route::resource('convenios', 'HealthInsurancesController');
+    Route::resource('agendamentos', 'SchedulesController');
 
     Route::get('home', function () {
         return view('admin.home');

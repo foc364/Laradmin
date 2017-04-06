@@ -71,7 +71,8 @@
                     @if (Auth::check())
                         <a href="{{ url('/admin/home') }}">Home</a>
                     @else
-                        <a href="{{ url('admin/login') }}">Login</a>
+                        <a href="{{ url('/admin/login') }}">Login</a>
+                        <a href="{{ url('/admin/register') }}">Register</a>
                     @endif
                 </div>
             @endif

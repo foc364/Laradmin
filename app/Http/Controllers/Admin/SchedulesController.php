@@ -1,29 +1,31 @@
 <?php
 
-namespace Larashop\Http\Controllers\Admin;
+namespace Larashop\Http\Controllers\admin;
 
-use Larashop\Models\User;
 use Illuminate\Http\Request;
-use Larashop\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Larashop\Http\Controllers\Controller;
+use Larashop\Models\Schedule;
+use Larashop\Models\Place;
+use Larashop\Models\HealthInsurance;
 
-class UsersController extends Controller
+class SchedulesController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $users = User::all();
+        $schedules = Schedule::all();
 
         $params = [
-            'title' => 'Users Listing',
-            'users' => $users,
+            'title' => 'Lista de agendamentos',
+            'schedules' => $schedules,
         ];
 
-        return view('admin.users.users_list')->with($params);
+        return view('admin.schedules.schedules_list')->with($params);
     }
 
     /**
@@ -33,11 +35,14 @@ class UsersController extends Controller
      */
     public function create()
     {
+
         $params = [
-            'title' => 'Criar Usuário',
+            'title' => 'Criar Agendamento',
+            'places' => Place::where('active', 1)->pluck('name', 'id'),
+            'healthInsurances' => HealthInsurance::where('active', 1)->pluck('name', 'id'),
         ];
 
-        return view('admin.users.users_create')->with($params);
+        return view('admin.schedules.schedules_create')->with($params);
     }
 
     /**

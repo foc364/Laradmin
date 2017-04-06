@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Larashop\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +12,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $user = new User;
+
+        $user->name = 'admin';
+        $user->email = 'atendimento@preseme.com.br';
+        $user->password = bcrypt('preseme');
+
+        $user->save();
     }
 }
