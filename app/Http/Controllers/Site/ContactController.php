@@ -17,8 +17,10 @@ class ContactController extends Controller
     {
         $beautymail = app()->make(Beautymail::class);
 
+        dd( $beautymail);
+
         $beautymail->send('emails.welcome', [], function($message) {
-            
+
         $message
             ->from('contato@preseme.com.br')
             ->to('foc364@gmail.com', 'John Smith')
