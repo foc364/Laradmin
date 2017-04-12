@@ -11,10 +11,32 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+//////////////////**SITE**///////////////
+Route::get('/', function () {
+    dd();
+    return view('/site/home');
+})->name('/');
+
+Route::get('orientacao', function () {
+    return view('/site/orientation');
+})->name('orientacao');
+
+Route::get('quem-somos', function () {
+    return view('/site/about');
+})->name('quem-somos');
+
+Route::get('localizacao', function () {
+    return view('/site/allocation');
+})->name('localizacao');
+
+Route::get('contato', 'Site\ContactController@index')->name('contato');
+
+Route::post('contato', 'Site\ContactController@store')->name('contato.store');
+//////////////////**SITE**///////////////
+
+
+/////////////////**ADMIN**//////////////////////
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
     Route::resource('usuarios', 'UsersController');
     Route::resource('consultorios', 'PlacesController');
@@ -38,6 +60,4 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('/admin', function () {
     return redirect()->route('login');
 })->name('admin');
-
-
-
+/////////////////**ADMIN**//////////////////////

@@ -127,23 +127,7 @@
 
             <!-- page content -->
             <div class="right_col" role="main">
-                @include('templates.admin.partials.alerts')
-                @yield('content')
-            </div>
-            <!-- /page content -->
-
-            <!-- footer content -->
-            <footer>
-                <div class="pull-right">
-                    Preseme Admin
-                </div>
-                <div class="clearfix"></div>
-            </footer>
-            <!-- /footer content -->
-        </div>
-    </div>
-
-    <!-- jQuery -->
+             <!-- jQuery -->
     <script src="{{asset('resources/js/jquery.min.js')}}"></script>
     <!-- Bootstrap -->
     <script src="{{asset('resources/js/bootstrap.min.js')}}"></script>
@@ -170,24 +154,37 @@
     <script src="{{asset('resources/js/pdfmake.min.js')}}"></script>
     <script src="{{asset('resources/js/vfs_fonts.js')}}"></script>
    
-
     <script src="{{asset('resources/form_helper/js/bootstrap-formhelpers-phone.js')}}"></script>
 
     <script src="{{asset('resources/date_picker/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('resources/date_picker/js/bootstrap-datepicker.min.js')}}"></script>
+    <script src="{{asset('resources/date_picker/js/bootstrap-datepicker.pt-BR.min.js')}}"></script>
     
 
 
     <!-- Custom Theme Scripts -->
     <script src="{{asset('resources/js/custom.min.js')}}"></script>
 
+                @include('templates.admin.partials.alerts')
+                @yield('content')
+            </div>
+            <!-- /page content -->
+
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    Preseme Admin
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+   
     <!-- Datatables -->
     <script>
         $(document).ready(function() {
-
-            $('#sandbox-container .input-group.date').datepicker({
-                format: "dd/mm/yyyy"
-            });
 
             var handleDataTableButtons = function() {
                 if ($("#datatable-buttons").length) {

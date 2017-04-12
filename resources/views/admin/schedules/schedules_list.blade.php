@@ -11,12 +11,21 @@
                     <h2>Agendamentos <a href="{{route('agendamentos.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Criar novo </a></h2>
                     <div class="clearfix"></div>
                 </div>
-                <div class="x_content">
+                <div class="x_content" id="sandbox-container">
+                    <form method="get" action="{{ route('agendamentos.index') }}" data-parsley-validate class="form-horizontal form-label-left" name="filter" id="filter">
+                        <div class="input-group date col-md-2 col-sm-2 col-xs-4" >
+                            <span class="input-group-addon" ><i class="glyphicon glyphicon-calendar"></i></span>
+                            <input type="text" name="date" class="form-control form-group" value="{{ Request::input('date') ?: Carbon::now()->format('d/m/Y') }}">
+                        </div>
+                        <input type="hidden" name="_token" value="{{ Session::token() }}">
+                    </form>
+
+                 
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>Paciente</th>
-                                <th>Telefone</th>
+                                <th>Telefone Principal</th>
                                 <th>Telefone Secundário</th>
                                 <th>E-mail</th>
                                 <th>Horário</th>
@@ -42,15 +51,13 @@
                             @foreach($schedules as $row)
                             <tr>
                                 <td>{{$row->name}}</td>
+                                <td>{{$phoneNumber->displayPhoneFormatted($row->phone)}}</td>
+                                <td>{{$phoneNumber->displayPhoneFormatted($row->phone_2)}}</td>
                                 <td>{{$row->email}}</td>
-                                <td>{{$row->phone}}</td>
-                                <td>{{$row->phone_2}}</td>
-                                <td>{{$row->email}}</td>
-                                <td>{{$row->data}}</td>
-                                <td>{{$row->place_id}}</td>
-                                <td>{{$row->health_insurance_id}}</td>
+                                <td>{{Carbon::createFromFormat('Y-m-d H:i:s', $row->date)->format('H:i')}}</td>
+                                <td>{{$places->get($row->place_id)}}</td>
+                                <td>{{$healthInsurances->get($row->health_insurance_id)}}</td>
                                 <td>
-                                    <a href="{{ route('agendamentos.edit', ['id' => $row->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Alterar"></i> </a>
                                     <a href="{{ route('agendamentos.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Excluir"></i> </a>
                                 </td>
                             </tr>
@@ -63,4 +70,22 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function() {
+    $('#sandbox-container .input-group.date').datepicker({
+        format: "dd/mm/yyyy",
+        todayBtn: "linked",
+        language: "pt-BR",
+        todayHighlight: true,
+        autoclose: true,
+    });
+
+    $('#sandbox-container .input-group.date').datepicker().on('changeDate', function(e) {
+       $('#filter').submit();
+    });
+     
+ 
+});
+</script>
 @stop

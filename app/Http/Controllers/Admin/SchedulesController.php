@@ -8,21 +8,32 @@ use Larashop\Http\Controllers\Controller;
 use Larashop\Models\Schedule;
 use Larashop\Models\Place;
 use Larashop\Models\HealthInsurance;
+use Larashop\Formatters\PhoneNumber;
+use Larashop\Formatters\DateFormatter;
+use Carbon;
+use DB;
 
 class SchedulesController extends Controller
 {
      /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $schedules = Schedule::all();
-
+    	$date = $request->input('date') ?: Carbon::now()->format('d/m/Y');
+    	$date = Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
+    	
+        $schedules = Schedule::where(DB::raw('DATE(date)'),  $date)->get();
+	
         $params = [
             'title' => 'Lista de agendamentos',
             'schedules' => $schedules,
+            'phoneNumber' => new PhoneNumber,
+            'healthInsurances' => HealthInsurance::pluck('name', 'id'),
+            'places' => Place::pluck('name', 'id'),
         ];
 
         return view('admin.schedules.schedules_list')->with($params);
@@ -40,6 +51,7 @@ class SchedulesController extends Controller
             'title' => 'Criar Agendamento',
             'places' => Place::where('active', 1)->pluck('name', 'id'),
             'healthInsurances' => HealthInsurance::where('active', 1)->pluck('name', 'id'),
+            'time' => ['10:00' => '10:00', '14:30' => '14:30'],
         ];
 
         return view('admin.schedules.schedules_create')->with($params);
@@ -53,19 +65,33 @@ class SchedulesController extends Controller
      */
     public function store(Request $request)
     {
+    	$phoneNumber = new PhoneNumber;
+
+    	$request['phone'] = $phoneNumber->stripSpecialChars($request->input('phone'));
+    	$request['phone_2'] = $phoneNumber->stripSpecialChars($request->input('phone_2'));
+
         $this->validate($request, [
             'name' => 'required|max:100',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|alpha_num|max:10',
+            'email' => 'nullable|email',
+            'phone' => 'required|numeric',
+            'phone_2' => 'nullable|numeric',
+            'healthInsurance' => 'required',
+            'place' => 'required',
+            'date' => 'required',
+            'time' => 'required',
         ]);
 
-        $user = User::create([
+        $schedule = Schedule::create([
             'name' => ucfirst($request->input('name')),
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
+            'phone' => $request->input('phone'),
+            'phone_2' => $request->input('phone_2'),
+            'health_insurance_id' => $request->input('healthInsurance'),
+            'place_id' => $request->input('place'),
+            'date' => (new DateFormatter)->MakeDateTime($request->input('date'), $request->input('time')),
         ]);
 
-        return redirect()->route('usuarios.index')->with('success', "Usuário <strong>$user->name</strong> foi criado com sucesso.");
+        return redirect()->route('agendamentos.index')->with('success', "Agendamento <strong>$schedule->name</strong> foi criado com sucesso.");
     }
 
     /**
@@ -78,14 +104,14 @@ class SchedulesController extends Controller
     {
         try
         {
-            $user = User::findOrFail($id);
+            $schedule = Schedule::findOrFail($id);
 
             $params = [
-                'title' => 'Excluir usuário',
-                'user' => $user,
+                'title' => 'Excluir agendamento',
+                'schedule' => $schedule,
             ];
 
-            return view('admin.users.users_delete')->with($params);
+            return view('admin.schedules.schedules_delete')->with($params);
         }
         catch (ModelNotFoundException $ex) 
         {
@@ -96,65 +122,6 @@ class SchedulesController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        try
-        {
-            $user = User::findOrFail($id);
-            $params = [
-                'title' => 'Alterar Usuário',
-                'user' => $user,
-            ];
-
-            return view('admin.users.users_edit')->with($params);
-        }
-        catch (ModelNotFoundException $ex) 
-        {
-            if ($ex instanceof ModelNotFoundException)
-            {
-                return response()->view('errors.'.'404');
-            }
-        }
-    }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        try
-        {
-            $user = User::findOrFail($id);
-
-            $this->validate($request, [
-                'name' => 'required|max:100',
-                'email' => 'required|email|unique:users,id,'.$id,
-            ]);
-
-            $user->name = ucfirst($request->input('name'));
-            $user->email = $request->input('email');
-            $user->save();
-
-            return redirect()->route('usuarios.index')->with('success', "Usuário <strong>$user->name</strong> foi alterado com sucesso.");
-        }
-        catch (ModelNotFoundException $ex) 
-        {
-            if ($ex instanceof ModelNotFoundException)
-            {
-                return response()->view('errors.'.'404');
-            }
-        }
-    }
-    
     /**
      * Remove the specified resource from storage.
      *
@@ -165,11 +132,11 @@ class SchedulesController extends Controller
     {
         try
         {
-            $user = User::findOrFail($id);
+            $schedule = Schedule::findOrFail($id);
 
-            $user->delete();
+            $schedule->delete();
 
-            return redirect()->route('usuarios.index')->with('success', "Usuário <strong>$user->name</strong> foi excluído com sucesso.");
+            return redirect()->route('agendamentos.index')->with('success', "Agendamento <strong>$schedule->name</strong> foi excluído com sucesso.");
         }
         catch (ModelNotFoundException $ex) 
         {
