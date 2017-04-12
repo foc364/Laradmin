@@ -17,8 +17,6 @@ class ContactController extends Controller
     {
         $beautymail = app()->make(Beautymail::class);
 
-        dd( $beautymail);
-
         $beautymail->send('emails.welcome', [], function($message) {
 
         $message
