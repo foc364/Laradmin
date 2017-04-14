@@ -5,6 +5,10 @@ namespace Larashop\Http\Controllers\Site;
 use Illuminate\Http\Request;
 use Larashop\Http\Controllers\Controller;
 use Snowfire\Beautymail\Beautymail;
+use Larashop\Formatters\PhoneNumber;
+use Larashop\Models\Config;
+use Larashop\Models\Place;
+use Larashop\Models\HealthInsurance;
 
 class ContactController extends Controller
 {
@@ -15,17 +19,20 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $beautymail = app()->make(Beautymail::class);
+        $schedules = (new config)->getSchedulesKeyValueEqual();
 
-        $beautymail->send('emails.welcome', [], function($message) {
+        $config = Config::find(1);
 
-        $message
-            ->from('contato@preseme.com.br')
-            ->to('foc364@gmail.com', 'John Smith')
-            ->subject('Welcome!');
-        });
+        $params = [
+            'schedules' => $schedules,
+            'places' => Place::pluck('name', 'name'),
+            'healthInsurances' => HealthInsurance::pluck('name', 'name'),
+            'config' => $config,
+            'phoneNumber' => new PhoneNumber,
+            'placesFooter' => Place::all(),
+        ];
 
-        return view('site.contact');
+        return view('site.contact')->with($params);
     }
 
     /**
@@ -36,13 +43,17 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-       
-        //$beautymail = new Beautymail(app()->make(Beautymail::class));
 
-       
+        $beautymail = app()->make(Beautymail::class);
 
-       
+        $beautymail->send('emails.welcome', $request->all(), function($message) {
 
-        return redirect()->route('contato')->with('success', "The brand <strong>$brand->name</strong> has successfully been created.");
+        $message
+            ->from('site@preseme.com.br')
+            ->to('contato@preseme.com.br', 'John Smith')
+            ->subject('Agendamento de consulta');
+        });
+
+        return redirect()->route('contato.index')->with('success', "E-mail enviado com sucesso.");
     }
 }

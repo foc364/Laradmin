@@ -173,4 +173,11 @@ body {
   text-align: center;
   line-height: 30px; }
 
+.textline {
+  font-size: 21px;
+  color: white !important;
+  font-weight: bold;
+  text-align: center;
+  line-height: 30px; }
+
 /*# sourceMappingURL=minty.css.map */

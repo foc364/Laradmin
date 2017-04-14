@@ -24,7 +24,7 @@ return [
         'address'     => null,
 
         'logo'        => [
-            'path'   => asset('resources/vendor/beautymail/assets/images/sunny/logo.png'),
+            'path'   => 'resources/vendor/beautymail/assets/images/minty/logo.png',
             'width'  => '',
             'height' => '',
         ],

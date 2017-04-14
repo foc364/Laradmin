@@ -23,8 +23,7 @@
 
 				<div class="texto">
 					<p><h1>Seja bem vindo</h1></p>
-					<p><h2>Cardiologistas com mais de 30 anos de experiencia, atualizados  e participantes de Gongressos médicos,nacionais e internecionais  com titulo de especialista pela ASSOCIAÇAO MEDICA BRASILEIRA E SOCIEDADE BRASILEIRA DE CARDIOLOGIA.</h2></p>
-					<p><h2>Tratamos de todas patologias que envolvem o sistema cardiovascular, principalmente a insuficiência cardíaca.</h2></p>
+					<h2> <?php print $config->text_home ?></h2>
 				</div>
 			</div>
 

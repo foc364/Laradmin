@@ -3,6 +3,7 @@
 namespace Larashop\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Larashop\Http\Controllers\Controller;
 use Larashop\Models\HealthInsurance;
 

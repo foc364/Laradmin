@@ -3,23 +3,25 @@
 		<div class="alinhamento">
 			<img class="local-1">
 			<div>
-				<p>Santana</p>
-				<p>Rua Voluntários da Pátria, 654, cj 807</p>
-				<p>Tel. 2239 1670 ou 2239 1805</p>
+				<p>{{ $placesFooter->get(0)->name }}</p>
+				<p>{{ $placesFooter->get(0)->address }}</p>
+				<p>Tel. {{ $phoneNumber->displayPhoneFormatted($placesFooter->get(0)->phone) }} &nbsp; 
+				{{ $phoneNumber->displayPhoneFormatted($placesFooter->get(0)->phone_2) }}</p>
 			</div>
 		</div>
 	</div>
 	<div class="div-email">
 		<img class="email" >
-		<p>email@email.com.b</p>
+		<p>{{ $config->contact_email }}</p>
 	</div>
 	<div class="div-local-2">
 		<div class="alinhamento">
 			<img class="local-2" >
 			<div>
-				<p>São Caetano</p>
-				<p>Avenida Senador Roberto Simonsen, 832</p>
-				<p>Tel. (11) 4226-1890</p>
+				<p>{{ $placesFooter->get(1)->name }}</p>
+				<p>{{ $placesFooter->get(1)->address }}</p>
+				<p>Tel. {{ $phoneNumber->displayPhoneFormatted($placesFooter->get(1)->phone) }} &nbsp; 
+				{{ $phoneNumber->displayPhoneFormatted($placesFooter->get(1)->phone_2) }}</p>
 			</div>
 		</div>
 	</div>

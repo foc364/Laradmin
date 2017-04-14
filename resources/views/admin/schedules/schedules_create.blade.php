@@ -123,7 +123,6 @@
             language: "pt-BR",
             daysOfWeekDisabled: "0,6",
             startDate: "07/04/2017",
-            endDate: "07/05/2017",
             todayHighlight: true,
             autoclose: true,
         });

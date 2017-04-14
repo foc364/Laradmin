@@ -7,6 +7,11 @@
 	<link href="{{asset('resources/site/css/plugins.css')}}" rel="stylesheet">
     <link href="{{asset('resources/site/css/contact.css')}}" rel="stylesheet">
 
+     <link href="{{asset('resources/date_picker/css/bootstrap-datepicker3.css')}}" rel="stylesheet">
+    <link href="{{asset('resources/date_picker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet">
+    <link href="{{asset('resources/date_picker/css/bootstrap-datepicker3.standalone.css')}}" rel="stylesheet">
+    <link href="{{asset('resources/date_picker/css/bootstrap-datepicker3.standalone.min.css')}}" rel="stylesheet">
+
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="{{asset('resources/site/js/jquery-mask-plugin/src/jquery.mask.js')}}"></script>
 
@@ -57,18 +62,14 @@
 									</div>
 								</div>
 								<div class="row">
+									<div class="col-sm-5" id="sandbox-container">
+			                            <div class="form-group input-group date ">
+			                                <input type="text" placeholder="Data" class="form-control form-group input-sm" name="date" }}" required>
+			                            </div>
+			                        </div>
 									<div class="col-sm-5">
 										<div class="form-group">
-									    	<input id="date" type="text" name="date" class="form-control input-sm" placeholder="Data da consulta" required="">
-										</div>
-									</div>
-									<div class="col-sm-5">
-										<div class="form-group">
-											<select name="time" class="form-control input-sm" required>
-												<option value="">Horário</option>
-												<option value="Santana">Santana</option>
-												<option value="São Caetano">São Caetano</option>
-											</select>
+											 {{ Form::select('schedule', $schedules, Request::old('schedule') ?: 'null', ['class' => 'form-control input-sm', 'placeholder' => 'Horário']) }}
 										</div>
 									</div>
 								</div>
@@ -76,29 +77,19 @@
 								<div class="row">
 									<div class="col-sm-5">
 										<div class="form-group">
-											<select name="place" class="form-control input-sm" required>
-												<option value="">Qual consultório?</option>
-												<option value="Santana">Santana</option>
-												<option value="São Caetano">São Caetano</option>
-											</select>
+											{{ Form::select('place', $places, Request::old('place') ?: 'null', ['class' => 'form-control input-sm', 'placeholder' => 'Consultório']) }}
 										</div>
 									</div>
 									<div class="col-sm-5">
 										<div class="form-group">
-										   	<select name="health_insurance" class="form-control input-sm" required>
-												<option value="">Plano de saúde / Particular</option>
-												<option value="Particular">Particular</option>
-												<option value="Amil">Amil</option>
-												<option value="Sul America">Sul America</option>
-												<option value="Omint">Omint</option>
-												<option value="Porto Seguro">Porto Seguro</option>
-												<option value="Gama">Gama</option>
-											</select>
+									   		{{ Form::select('health_insurance', $healthInsurances, Request::old('health_insurance') ?: 'null', ['class' => 'form-control input-sm', 'placeholder' => 'Convênio / Particular']) }}
 										</div>
 									</div>
 								</div>
 								<button type="submit" class="btn btn-default">Enviar</button>
-								<label id="msg-sucess" class="msg-sucess">Enviado com sucesso</label>
+								@if (Session::has('success'))
+								<label>{!! Session::get('success') !!}</label>
+								@endif
 								<input type="hidden" name="_token" value="{{ Session::token() }}">
 							</form>
 						</div>
@@ -111,16 +102,18 @@
 				<h1>Contato</h1>
 				<div>
 					<img class="tel">
-					<p><h2>Consultório Santana</h2></p>
-					<p><h3>Tel. 2239 1670 ou 2239 1805</h3></p>
+					<p><h2>Consultório {{ $placesFooter->get(0)->name }}</h2></p>
+					<p><h3>Tel. {{ $phoneNumber->displayPhoneFormatted($placesFooter->get(0)->phone) }} &nbsp; 
+				{{ $phoneNumber->displayPhoneFormatted($placesFooter->get(0)->phone_2) }}</h3></p>
 				</div>
 				<div>
-					<p><h2>Consultório São Caetano</h2></p>
-					<p><h3>Tel. (11) 4226-1890</h3></p>
+					<p><h2>Consultório {{ $placesFooter->get(1)->name }}</h2></p>
+					<p><h3>Tel. {{ $phoneNumber->displayPhoneFormatted($placesFooter->get(1)->phone) }} &nbsp; 
+					{{ $phoneNumber->displayPhoneFormatted($placesFooter->get(1)->phone_2) }}</h3></p>
 				</div>
 				<div>
 					<img class="email">
-					<p><h3>email@email.com.b</h3></p>
+					<p><h3>{{ $config->contact_email}}</h3></p>
 				</div>
 			</div>
 		</main>
@@ -134,8 +127,12 @@
 </body>
 </html>
 
+<script src="{{asset('resources/date_picker/js/bootstrap-datepicker.js')}}"></script>
+<script src="{{asset('resources/date_picker/js/bootstrap-datepicker.min.js')}}"></script>
+<script src="{{asset('resources/date_picker/js/bootstrap-datepicker.pt-BR.min.js')}}"></script>
+
 <script>
-	$(document).ready(function(){
+$(document).ready(function(){
 	var maskBehavior = function (val) {
 	 return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
 	},
@@ -146,5 +143,16 @@
 
 	$('#phone').mask(maskBehavior, options);
 	$('#date').mask('00/00/0000');
+
+	$('#sandbox-container input').datepicker({
+            format: "dd/mm/yyyy",
+            todayBtn: "linked",
+            language: "pt-BR",
+            daysOfWeekDisabled: "0,6",
+            startDate: "07/04/2017",
+            endDate: "07/05/2017",
+            todayHighlight: true,
+            autoclose: true,
+    });
 });
 </script>

@@ -23,8 +23,8 @@
 			
 			<div class="flex-foto">
 				<div class="desc-texto">
-					<p><h1>Consultório Santana</h1></p>
-					<p><h2>Rua Voluntários da Pátria, 654, cj 807 - Santana</h2></p>
+					<p><h1>Consultório  {{ $placesFooter->get(0)->name }} </h1></p>
+					<p><h2> {{ $placesFooter->get(0)->address }} </h2></p>
 					<p><h2>São Paulo - SP</h2></p>
 					<p><h2>(Próximo ao Metrô Portuguesa-Tietê)</h2></p>
 				</div>
@@ -35,8 +35,8 @@
 			<div class="flex-texto-nav">
 				<div class="texto">
 					<div class="desc-texto">
-						<p><h1>Consultório São Caetano</h1></p>
-						<p><h2>Avenida Senador Roberto Simonsen, 832- Ceramica</h2></p>
+						<p><h1>Consultório {{ $placesFooter->get(1)->name }}</h1></p>
+						<p><h2>{{ $placesFooter->get(1)->address }}</h2></p>
 						<p><h2>São Caetano Do Sul - SP</h2></p>
 					</div>
 

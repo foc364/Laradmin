@@ -8,6 +8,7 @@ use Larashop\Http\Controllers\Controller;
 use Larashop\Models\Schedule;
 use Larashop\Models\Place;
 use Larashop\Models\HealthInsurance;
+use Larashop\Models\Config;
 use Larashop\Formatters\PhoneNumber;
 use Larashop\Formatters\DateFormatter;
 use Carbon;
@@ -46,12 +47,13 @@ class SchedulesController extends Controller
      */
     public function create()
     {
+        $time = (new config)->getSchedulesArray();
 
         $params = [
             'title' => 'Criar Agendamento',
             'places' => Place::where('active', 1)->pluck('name', 'id'),
             'healthInsurances' => HealthInsurance::where('active', 1)->pluck('name', 'id'),
-            'time' => ['10:00' => '10:00', '14:30' => '14:30'],
+            'time' => $time,
         ];
 
         return view('admin.schedules.schedules_create')->with($params);
@@ -76,7 +78,6 @@ class SchedulesController extends Controller
             'phone' => 'required|numeric',
             'phone_2' => 'nullable|numeric',
             'healthInsurance' => 'required',
-            'place' => 'required',
             'date' => 'required',
             'time' => 'required',
         ]);
