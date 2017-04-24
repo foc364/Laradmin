@@ -64,12 +64,12 @@
 								<div class="row">
 									<div class="col-sm-5" id="sandbox-container">
 			                            <div class="form-group input-group date ">
-			                                <input type="text" placeholder="Data" class="form-control form-group input-sm" name="date" }}" required>
+			                                <input type="text" placeholder="Data" class="form-control form-group input-sm" name="date" id="date" required>
 			                            </div>
 			                        </div>
 									<div class="col-sm-5">
 										<div class="form-group">
-											 {{ Form::select('schedule', $schedules, Request::old('schedule') ?: 'null', ['class' => 'form-control input-sm', 'placeholder' => 'Horário']) }}
+											 {{ Form::select('schedule', $schedules, Request::old('schedule') ?: 'null', ['class' => 'form-control input-sm', 'placeholder' => 'Horário', 'id' => 'schedule']) }}
 										</div>
 									</div>
 								</div>
@@ -77,7 +77,7 @@
 								<div class="row">
 									<div class="col-sm-5">
 										<div class="form-group">
-											{{ Form::select('place', $places, Request::old('place') ?: 'null', ['class' => 'form-control input-sm', 'placeholder' => 'Consultório']) }}
+											{{ Form::select('place', $places, Request::old('place') ?: 'null', ['class' => 'form-control input-sm', 'placeholder' => 'Consultório', 'id' => 'place']) }}
 										</div>
 									</div>
 									<div class="col-sm-5">
@@ -155,4 +155,27 @@ $(document).ready(function(){
             autoclose: true,
     });
 });
+
+
+$( "#place" ).change(function() {
+	$.ajax({
+	    type: 'GET',
+	    data: {
+	      date: $('#date').val()
+	    },
+	    url: 'request-schedules-available',
+	    dataType: 'json',
+	    success: function (data) {
+	    	$('#schedule').html(data);
+
+	        console.log(data);
+	     
+	    },
+	    error: function (data) {
+	        console.log('Error:', data);
+	    }
+	});
+});
+
+
 </script>

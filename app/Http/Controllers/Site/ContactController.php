@@ -9,6 +9,7 @@ use Larashop\Formatters\PhoneNumber;
 use Larashop\Models\Config;
 use Larashop\Models\Place;
 use Larashop\Models\HealthInsurance;
+use Larashop\Models\Schedule;
 
 class ContactController extends Controller
 {
@@ -19,6 +20,7 @@ class ContactController extends Controller
      */
     public function index()
     {
+
         $schedules = (new config)->getSchedulesKeyValueEqual();
 
         $config = Config::find(1);

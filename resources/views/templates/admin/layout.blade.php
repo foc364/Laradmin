@@ -75,7 +75,7 @@
                                 <li><a href="{{route('consultorios.index')}}"><i class="fa fa-building"></i> Consultórios </a></li>
                                 <li><a href="{{route('convenios.index')}}"><i class="fa fa-plus-square"></i> Convênios </a></li>
                                 <li><a href="{{route('agendamentos.index')}}"><i class="fa fa-calendar-check-o"></i> Agendamentos </a></li>
-                                <li><a><i class="fa fa-cog"></i> Configurações <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-cog"></i> Edição de Texto <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{route('configuracoes.edit', ['id' => 1])}}">Horário de atendimento</a></li>
                                         <li><a href="{{route('configuracoes-contato.edit', ['id' => 1])}}">E-mail de contato</a></li>

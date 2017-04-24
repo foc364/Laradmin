@@ -47,7 +47,7 @@ class SchedulesController extends Controller
      */
     public function create()
     {
-        $time = (new config)->getSchedulesArray();
+        $time = (new config)->getSchedulesKeyValueEqual();
 
         $params = [
             'title' => 'Criar Agendamento',

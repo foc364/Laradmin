@@ -47,7 +47,6 @@ Route::get('localizacao', function () {
         ->with('phoneNumber', new PhoneNumber);
 })->name('localizacao');
 
-
 //Route::get('contato', 'Site\ContactController@index')->name('contato')->with($config);
 
 //Route::post('contato', 'Site\ContactController@store')->name('contato.store');
@@ -86,3 +85,12 @@ Route::get('/admin', function () {
     return redirect()->route('login');
 })->name('admin');
 /////////////////**ADMIN**//////////////////////
+
+
+/////////////////**REQUESTS**//////////////////////
+
+Route::get('request-schedules-available', [
+    'uses' => 'Request\RequestsController@getScheduleAvailableList'
+]);
+
+/////////////////**REQUESTS**//////////////////////
