@@ -18,15 +18,21 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        $schedules = (new config)->getSchedulesKeyValueEqual();
-
+        $schedules = (new Schedule)->schedulesAvailableByDate($request->input('date'));
+     
         $config = Config::find(1);
 
         $params = [
-            'schedules' => $schedules,
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'place' => $request->input('place'),
+            'date' => $request->input('date'),
+            'health_insurance' => $request->input('health_insurance'),
+            'schedule' => $request->input('schedule'),
+            'schedules' => (!empty($schedules) ? $schedules : ['' => 'Agenda Lotada']),
             'places' => Place::pluck('name', 'name'),
             'healthInsurances' => HealthInsurance::pluck('name', 'name'),
             'config' => $config,
@@ -45,6 +51,15 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|max:100',
+            'email' => 'email',
+            'phone' => 'required',
+            'date' => 'required',
+            'place' => 'required',
+            'health_insurance' => 'required',
+            'schedule' => 'required',
+        ]);
 
         $beautymail = app()->make(Beautymail::class);
 

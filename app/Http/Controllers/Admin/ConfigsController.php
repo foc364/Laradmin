@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Larashop\Http\Controllers\Controller;
 use Larashop\Models\Config;
+use Larashop\Models\Schedule;
 
 class ConfigsController extends Controller
 {
@@ -26,11 +27,11 @@ class ConfigsController extends Controller
             if (!$schedules_old) {
                 $schedules_old = [];
             }
-       
+
             $params = [
                 'title' => 'Configurações',
                 'schedules_old' => $schedules_old,
-                'schedules' => (new Config)->schedules,
+                'schedules' => (new Schedule)->schedules,
             ];
 
             return view('admin.configs.configs_edit')->with($params);
@@ -52,15 +53,15 @@ class ConfigsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
         try
         {
             $config = Config::findOrFail($id);
-
             $config->time = null;
 
             if ($request->input('schedules')) {
-                $config->time = json_encode($request->input('schedules'));
+                $schedule =  (new Schedule)->formatScheduleKeyValueEqual($request->input('schedules'));
+                $config->time = json_encode($schedule);
             }
         
             $config->save();

@@ -4,6 +4,8 @@ namespace Larashop\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Larashop\Formatters\DateFormatter;
+use Larashop\Models\Config;
 use Carbon;
 use DB;
 
@@ -27,73 +29,58 @@ class Schedule extends Model
     ];
 
     public $schedules = [
-            1 => '07:00',
-            2 => '07:30',
-            3 => '08:00',
-            4 => '08:30',
-            5 => '09:00',
-            6 => '09:30',
-            7 => '10:00',
-            8 => '10:30',
-            9 => '11:00',
-            10 => '11:30',
-            11 => '12:00',
-            12 => '12:30',
-            13 => '13:00',
-            14 => '13:30',
-            15 => '14:00',
-            16 => '14:30',
-            17 => '15:00',
-            18 => '15:30',
-            19 => '16:00',
-            20 => '16:30',
-            21 => '17:00',
-            22 => '17:30',
-            23 => '18:00',
-            24 => '18:30',
-            25 => '19:00',
-            26 => '19:30',
-            27 => '20:00',
+            '07:00' => '07:00',
+            '07:30' => '07:30',
+            '08:00' => '08:00',
+            '08:30' => '08:30',
+            '09:00' => '09:00',
+            '09:30' => '09:30',
+            '10:00' => '10:00',
+            '10:30' => '10:30',
+            '11:00' => '11:00',
+             '11:30' => '11:30',
+             '12:00' => '12:00',
+             '12:30' => '12:30',
+             '13:00' => '13:00',
+             '13:30' => '13:30',
+             '14:00' => '14:00',
+             '14:30' => '14:30',
+             '15:00' => '15:00',
+             '15:30' => '15:30',
+             '16:00' => '16:00',
+             '16:30' => '16:30',
+             '17:00' => '17:00',
+             '17:30' => '17:30',
+             '18:00' => '18:00',
+             '18:30' => '18:30',
+             '19:00' => '19:00',
+             '19:30' => '19:30',
+             '20:00' => '20:00',
     ];
 
-    public function getSchedulesAvailable($date = '')
+    public function formatScheduleKeyValueEqual($scheduleList = '')
     {
-        if (!$date) {
+        if (!is_array($scheduleList)) {
             return;
         }
 
-        $schedules = $this->where(DB::raw('DATE(date)'), $date)->get()->pluck('date');
-
-        $formatedSchedules = [];
-
-        foreach ($schedules as $schedule) {
-            $formated = Carbon::createFromFormat('Y-m-d H:i:s', $schedule)->format('H:i');
-            $formatedSchedules[$formated] = $formated;
-        }
-
-        return $this->removeSchedulesFromArray($formatedSchedules);
-    }
-
-    public function getSchedulesKeyValueEqual()
-    {
         $schedules_new = [];
 
-        foreach ($this->schedules as $key => $schedule) {
+        foreach ($scheduleList as $key => $schedule) {
             $schedules_new[$schedule] = $schedule;
         }
 
         return $schedules_new;
     }
 
-    private function removeSchedulesFromArray($schedules = [])
+    private function removeSchedulesFromArray($scheduleConfig = [], $scheduleUsed = [])
     {
-        $scheduleList = $this->getSchedulesKeyValueEqual();
 
-        foreach ($schedules as $scheduleRemove) {
-            unset($scheduleList[$scheduleRemove]);
+        foreach ($scheduleUsed as $scheduleRemove) {
+            unset($scheduleConfig[$scheduleRemove]);
         }
 
-        return $scheduleList;
+        return $scheduleConfig;
     }
 
     public function getScheduleOptionFormat($date = '')
@@ -110,5 +97,40 @@ class Schedule extends Model
         }
 
         return $scheduleOptions;
+    }
+
+    public function schedulesAvailableByDate($date = '')
+    {
+        if (!$date) {
+            return;
+        }
+
+        $date = (new DateFormatter)->BrToDefaultDate($date);
+
+        $scheduleConfig = (new Config)->getScheduleConfig();
+
+        $scheduleUsed = $this->getScheduleUsedByDate($date);
+
+        if (empty($scheduleUsed)) {
+            return  $scheduleConfig;
+        }
+
+        return $this->removeSchedulesFromArray($scheduleConfig, $scheduleUsed);
+    }
+
+    public function getScheduleUsedByDate($date)
+    {
+        $schedules = $this->where(DB::raw('DATE(date)'), $date)->get()->pluck('date')->toArray();
+
+        if (empty($schedules)) {
+            return;
+        }
+
+        foreach ($schedules as $schedule) {
+            $formated = Carbon::createFromFormat('Y-m-d H:i:s', $schedule)->format('H:i');
+            $formatedSchedules[$formated] = $formated;
+        }
+
+        return $formatedSchedules;
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Larashop\Models\User;
 use Larashop\Models\Config;
+use Larashop\Models\Schedule;
 use Larashop\Models\Place;
 
 class DatabaseSeeder extends Seeder
@@ -27,8 +28,9 @@ class DatabaseSeeder extends Seeder
         $user->save();
 
         $config = new Config;
+        $schedule = new Schedule;
 
-        $config->time = json_encode($config->schedules);
+        $config->time = json_encode($schedule->schedules);
         $config->contact_email = 'contato@preseme.com.br';
         $config->text_home = 'Cardiologistas com mais de 30 anos de experiencia, atualizados e participantes de Gongressos médicos,nacionais e internecionais com titulo de especialista pela ASSOCIAÇAO MEDICA BRASILEIRA E SOCIEDADE BRASILEIRA DE CARDIOLOGIA.
 

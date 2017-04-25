@@ -86,11 +86,3 @@ Route::get('/admin', function () {
 })->name('admin');
 /////////////////**ADMIN**//////////////////////
 
-
-/////////////////**REQUESTS**//////////////////////
-
-Route::get('request-schedules-available', [
-    'uses' => 'Request\RequestsController@getScheduleAvailableList'
-]);
-
-/////////////////**REQUESTS**//////////////////////

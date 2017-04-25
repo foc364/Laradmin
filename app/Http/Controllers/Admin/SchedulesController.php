@@ -47,13 +47,13 @@ class SchedulesController extends Controller
      */
     public function create()
     {
-        $time = (new config)->getSchedulesKeyValueEqual();
-
+        $time = (new schedule)->schedulesAvailableByDate(date('Y-m-d'));
+      
         $params = [
             'title' => 'Criar Agendamento',
             'places' => Place::where('active', 1)->pluck('name', 'id'),
             'healthInsurances' => HealthInsurance::where('active', 1)->pluck('name', 'id'),
-            'time' => $time,
+            'time' => !empty($time) ? $time : ['' => 'Agenda Lotada'],
         ];
 
         return view('admin.schedules.schedules_create')->with($params);
@@ -77,6 +77,7 @@ class SchedulesController extends Controller
             'email' => 'nullable|email',
             'phone' => 'required|numeric',
             'phone_2' => 'nullable|numeric',
+            'place' => 'required',
             'healthInsurance' => 'required',
             'date' => 'required',
             'time' => 'required',
