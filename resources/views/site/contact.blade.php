@@ -133,6 +133,7 @@
 <script src="{{asset('resources/date_picker/js/bootstrap-datepicker.js')}}"></script>
 <script src="{{asset('resources/date_picker/js/bootstrap-datepicker.min.js')}}"></script>
 <script src="{{asset('resources/date_picker/js/bootstrap-datepicker.pt-BR.min.js')}}"></script>
+<script src="{{asset('resources/js/date_helper/date.js')}}"></script>
 
 <script>
 $(document).ready(function(){
@@ -152,8 +153,8 @@ $(document).ready(function(){
             todayBtn: "linked",
             language: "pt-BR",
             daysOfWeekDisabled: "0,6",
-            startDate: "07/04/2017",
-            endDate: "07/05/2017",
+            startDate: brToday(),
+            endDate: somaDate(60),
             todayHighlight: true,
             autoclose: true,
     });

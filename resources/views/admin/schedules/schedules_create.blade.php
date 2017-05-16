@@ -114,7 +114,6 @@
         </div>
     </div>
 </div>
-
 <script>
     $(document).ready(function() {
         $('#sandbox-container .input-group.date').datepicker({
@@ -122,7 +121,6 @@
             todayBtn: "linked",
             language: "pt-BR",
             daysOfWeekDisabled: "0,6",
-            startDate: "07/04/2017",
             todayHighlight: true,
             autoclose: true,
         });
