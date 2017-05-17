@@ -13,6 +13,7 @@
                 </div>
                 <div class="x_content" id="sandbox-container">
                     <form method="get" action="{{ route('agendamentos.index') }}" data-parsley-validate class="form-horizontal form-label-left" name="filter" id="filter">
+                        <label>Data da consulta</label>
                         <div class="input-group date col-md-2 col-sm-2 col-xs-4" >
                             <span class="input-group-addon" ><i class="glyphicon glyphicon-calendar"></i></span>
                             <input type="text" name="date" class="form-control form-group" value="{{ Request::input('date') ?: Carbon::now()->format('d/m/Y') }}">
