@@ -48,12 +48,12 @@ class SchedulesController extends Controller
     public function create()
     {
         $time = (new schedule)->schedulesAvailableByDate(date('Y-m-d'));
-      
+
         $params = [
             'title' => 'Criar Agendamento',
             'places' => Place::where('active', 1)->pluck('name', 'id'),
             'healthInsurances' => HealthInsurance::where('active', 1)->pluck('name', 'id'),
-            'time' => !empty($time) ? $time : ['' => 'Agenda Lotada'],
+            'time' => !empty($time) ? (new schedule)->formatScheduleKeyValueEqual($time) : ['' => 'Agenda Lotada'],
         ];
 
         return view('admin.schedules.schedules_create')->with($params);

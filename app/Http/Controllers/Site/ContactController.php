@@ -21,7 +21,7 @@ class ContactController extends Controller
     public function index(Request $request)
     {
         $schedules = (new Schedule)->schedulesAvailableByDate($request->input('date'));
-     
+
         $config = Config::find(1);
 
         $params = [
@@ -32,7 +32,7 @@ class ContactController extends Controller
             'date' => $request->input('date'),
             'health_insurance' => $request->input('health_insurance'),
             'schedule' => $request->input('schedule'),
-            'schedules' => (!empty($schedules) ? $schedules : ['' => 'Agenda Lotada']),
+            'schedules' => (!empty($schedules) ? (new Schedule)->formatScheduleKeyValueEqual($schedules) : ['' => 'Agenda Lotada']),
             'places' => Place::pluck('name', 'name'),
             'healthInsurances' => HealthInsurance::pluck('name', 'name'),
             'config' => $config,
