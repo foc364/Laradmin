@@ -159,7 +159,7 @@
     <script src="{{asset('resources/js/dataTables.keyTable.min.js')}}"></script>
     <script src="{{asset('resources/js/dataTables.responsive.min.js')}}"></script>
     <script src="{{asset('resources/js/responsive.bootstrap.js')}}"></script>
-    <script src="{{asset('resources/js/datatables.scroller.min.js')}}"></script>
+    <script src="{{asset('resources/js/dataTables.scroller.min.js')}}"></script>
     <script src="{{asset('resources/js/jszip.min.js')}}"></script>
     <script src="{{asset('resources/js/pdfmake.min.js')}}"></script>
     <script src="{{asset('resources/js/vfs_fonts.js')}}"></script>
@@ -169,11 +169,13 @@
     <script src="{{asset('resources/date_picker/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('resources/date_picker/js/bootstrap-datepicker.min.js')}}"></script>
     <script src="{{asset('resources/date_picker/js/bootstrap-datepicker.pt-BR.min.js')}}"></script>
-    
+
+    <script src="{{asset('resources/js/custom.min.js')}}"></script>
+
 
 
     <!-- Custom Theme Scripts -->
-    <script src="{{asset('resources/js/custom.min.js')}}"></script>
+    <script src="{{asset('resources/js/date_helper/date.js')}}"></script>
 
                 @include('templates.admin.partials.alerts')
                 @yield('content')
