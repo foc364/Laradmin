@@ -108,6 +108,7 @@ class Schedule extends Model
         $date = (new DateFormatter)->BrToDefaultDate($date);
 
         $scheduleConfig = (new Config)->getScheduleConfig();
+        $scheduleConfig = $this->formatScheduleKeyValueEqual($scheduleConfig);
 
         $scheduleUsed = $this->getScheduleUsedByDate($date);
 
