@@ -13,45 +13,8 @@ use Larashop\Formatters\PhoneNumber;
 |
 */
 
-
 //////////////////**SITE**///////////////
-Route::get('/', function () {
-
-    return view('/site/home')
-        ->with('config', Config::find(1))
-        ->with('placesFooter', Place::all())
-        ->with('phoneNumber', new PhoneNumber);
-})->name('/');
-
-Route::get('orientacao', function () {
-    
-    return view('/site/orientation')
-        ->with('config', Config::find(1))
-        ->with('placesFooter', Place::all())
-        ->with('phoneNumber', new PhoneNumber);
-})->name('orientacao');
-
-Route::get('quem-somos', function () {
-    
-    return view('/site/about')
-        ->with('config', Config::find(1))
-        ->with('placesFooter', Place::all())
-        ->with('phoneNumber', new PhoneNumber);
-})->name('quem-somos');
-
-Route::get('localizacao', function () {
-
-    return view('/site/allocation')
-        ->with('config', Config::find(1))
-        ->with('placesFooter', Place::all())
-        ->with('phoneNumber', new PhoneNumber);
-})->name('localizacao');
-
-//Route::get('contato', 'Site\ContactController@index')->name('contato')->with($config);
-
-//Route::post('contato', 'Site\ContactController@store')->name('contato.store');
-
-Route::resource('contato', 'Site\ContactController');
+Route::resource('/', 'Site\SiteController');
 //////////////////**SITE**///////////////
 
 
