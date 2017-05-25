@@ -2,6 +2,8 @@
 use Larashop\Models\Config;
 use Larashop\Models\Place;
 use Larashop\Formatters\PhoneNumber;
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,4 +50,14 @@ Route::get('/admin', function () {
     return redirect()->route('login');
 })->name('admin');
 /////////////////**ADMIN**//////////////////////
+
+//////////////////**REQUISIÇÕES**///////////////
+
+Route::post('site-requests', function (Request $request) {
+    $app = app();
+    $controller = $app->make('Larashop\Http\Controllers\Site\SiteController');
+
+    return $controller->callAction($request->action, [$request]);
+});
+//////////////////**REQUISIÇÕES**///////////////
 

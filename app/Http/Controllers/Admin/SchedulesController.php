@@ -47,7 +47,7 @@ class SchedulesController extends Controller
      */
     public function create()
     {
-        $time = (new schedule)->schedulesAvailableByDate(date('Y-m-d'));
+        $time = (new schedule)->getSchedulesAvailableByDate(date('Y-m-d'));
 
         $params = [
             'title' => 'Criar Agendamento',

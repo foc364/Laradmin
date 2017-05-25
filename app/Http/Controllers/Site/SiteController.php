@@ -10,30 +10,24 @@ use Larashop\Models\Config;
 use Larashop\Models\Place;
 use Larashop\Models\HealthInsurance;
 use Larashop\Models\Schedule;
+use Response;
 
 class SiteController extends Controller
 {
-      /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $schedules = (new Schedule)->schedulesAvailableByDate($request->input('date'));
+        $schedules = (new Schedule)->getSchedulesAvailableByDate($request->input('date'));
 
         $config = Config::find(1);
      
         $params = [
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'phone' => $request->input('phone'),
-            'place' => $request->input('place'),
-            'date' => $request->input('date'),
-            'health_insurance' => $request->input('health_insurance'),
-            'schedule' => $request->input('schedule'),
+            'request' => $request,
             'schedules' => (!empty($schedules) ? (new Schedule)->formatScheduleKeyValueEqual($schedules) : ['' => 'Agenda Lotada']),
-            'places' => Place::pluck('name', 'name'),
             'healthInsurances' => HealthInsurance::pluck('name', 'name'),
             'config' => $config,
             'phoneNumber' => new PhoneNumber,
@@ -49,6 +43,7 @@ class SiteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+/*
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -72,5 +67,45 @@ class SiteController extends Controller
         });
 
         return redirect()->route('contato.index')->with('success', "E-mail enviado com sucesso.");
+    }
+*/
+    public function getAvailableSchedule(Request $request)
+    {
+        $schedules = (new Schedule)->getScheduleAvailableOptionFormat($request->date);
+
+        return Response::json($schedules);
+    }
+
+    public function sendEmail(Request $request) 
+    {
+        foreach ($request->form as $fields) {
+            $request->request->add([ $fields['name'] => $fields['value'] ]);
+        }
+
+        $request->request->remove('action');
+        $request->request->remove('form');
+
+        $this->validate($request, [
+            'name' => 'required|max:100',
+            'email' => 'email',
+            'phone' => 'required',
+            'date' => 'required',
+            'place' => 'required',
+            'health_insurance' => 'required',
+            'schedule' => 'required',
+        ]);
+
+        $beautymail = app()->make(Beautymail::class);
+
+        $beautymail->send('emails.welcome', $request->all(), function($message) {
+
+        $message
+            ->from('site@preseme.com.br')
+            ->to('contato@preseme.com.br', 'John Smith')
+            ->subject('Agendamento de consulta');
+        });
+
+        return Response::json("Enviado com sucesso");
+
     }
 }

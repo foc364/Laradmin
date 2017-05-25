@@ -5,7 +5,7 @@
       <div class="container">
         <div class="navbar-header">
           <!-- Logo Starts -->
-          <a class="navbar-brand" href="#home"><img id="img_logo" src="resources/site/images/logoteste.jpg" alt="logo"></a>
+          <a class="navbar-brand" href="#home"></a>
           <!-- #Logo Ends -->
 
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">

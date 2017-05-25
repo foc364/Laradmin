@@ -83,9 +83,9 @@ class Schedule extends Model
         return $scheduleConfig;
     }
 
-    public function getScheduleOptionFormat($date = '')
+    public function getScheduleAvailableOptionFormat($date = '')
     {
-        $scheduleList = $this->getSchedulesAvailable($date);
+        $scheduleList = $this->getSchedulesAvailableByDate($date);
         $scheduleOptions = '';
 
         if (!is_array($scheduleList)) {
@@ -99,7 +99,7 @@ class Schedule extends Model
         return $scheduleOptions;
     }
 
-    public function schedulesAvailableByDate($date = '')
+    public function getSchedulesAvailableByDate($date = '')
     {
         if (!$date) {
             return;

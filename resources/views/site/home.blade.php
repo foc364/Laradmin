@@ -79,8 +79,6 @@
 <!-- custom script -->
 <script src="resources/site/script.js"></script>
 
-
-
 <!-- datepicker -->
 <script src="resources/date_picker/js/bootstrap-datepicker.js"></script>
 <script src="resources/date_picker/js/bootstrap-datepicker.min.js"></script>
@@ -91,7 +89,7 @@
 <script src="resources/site/js/jquery-mask-plugin/src/jquery.mask.js"></script>
 
 <script>
-$(document).ready(function(){
+  $(document).ready(function(){
   var maskBehavior = function (val) {
     return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
   },
@@ -115,23 +113,61 @@ $(document).ready(function(){
   });
 
   $("#place").on("change", function(e) {
-    $('#form_contact').attr('method', 'GET');
-    $('#form_contact').attr('action', $("#route_index").val()).submit();
+    if ($('#place').val()) {
+      $('#date').attr('disabled', false);
+      $('#health_insurance').attr('disabled', false);
+    }
   });
-    
-  if ($('#place').val()) {
-    $('#date').attr('disabled', false);
-    $('#health_insurance').attr('disabled', false);
-  }
 
-  if ($('#date').val()) {
-    $('#schedule').attr('disabled', false);
-  }
-
+/***** Quando troca a data ******/
   $('#sandbox-container input').datepicker().on('changeDate', function(e) {
-    $('#form_contact').attr('method', 'GET');
-    $('#form_contact').attr('action', $("#route_index").val()).submit();
+    var parameters = {
+      action: 'getAvailableSchedule',
+      date: $('#date').val()
+    };
+
+    $.ajax({
+      type: 'POST',
+      url: 'site-requests',
+      data: parameters,
+      dataType: 'json',
+      success: function (data) {
+        $('#schedule').attr('disabled', false);
+        $('#schedule').empty().append(data);
+      },
+      error: function (data) {
+        console.log('Error:', data);
+      }
+    });
   });
+/***** Quando troca a data ******/
+
+$('#form_contact').submit(function( event ) {
+  var parameters = {
+    action: 'sendEmail',
+    form: $('#form_contact').serializeArray()
+  };
+
+  $.ajax({
+      type: 'POST',
+      url: 'site-requests',
+      data: parameters,
+      dataType: 'json',
+      success: function (data) {
+        $('#msg_email').html(data).fadeIn('slow');
+        $("#form_contact")[0].reset();
+      },
+      error: function (data) {
+        console.log('Error:', data);
+      }
+  });
+
+
+  event.preventDefault();
+});
+
+
+ 
 });
 </script>
 

@@ -54,7 +54,6 @@ p{font-size:1em;line-height: 1.7em; margin-bottom: 1.7em;}
 .process ul li span b{display: block;font-size: 1em;font-weight: 300;}
 .foto-legend{text-align: center;}
 
-
 /*testimonials*/
 .partners img{float: left;margin:0 75px 30px 0;}
 .testimonails{min-height: 195px;}
@@ -85,6 +84,7 @@ p{font-size:1em;line-height: 1.7em; margin-bottom: 1.7em;}
 
 /*appointment*/
 .appointmentform textarea,.appointmentform input{width: 100%;padding:1em;border:1px solid #ccc;margin-bottom: 1em;border-radius: 0;outline: none;}
+#div_email{margin-bottom: 18px;color: darkgreen;font-weight: bold;}
 /*appointment*/
 
 /*contact*/
