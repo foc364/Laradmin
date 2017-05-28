@@ -27,7 +27,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::resource('convenios', 'HealthInsurancesController');
     Route::resource('agendamentos', 'SchedulesController');
     Route::resource('configuracoes', 'ConfigsController');
-    Route::resource('configuracoes-home', 'ConfigsHomeController');
     Route::resource('configuracoes-quem-somos', 'ConfigsAboutController');
     Route::resource('configuracoes-orientacao', 'ConfigsOrientationController');
     Route::resource('configuracoes-contato', 'ConfigsContactController');

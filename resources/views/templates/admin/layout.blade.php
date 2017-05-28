@@ -9,7 +9,7 @@
 
     <title>{{ env('APP_PRODUCT') }} Admin</title>
 
-    <link rel="shortcut icon" type="image/png" href="{{asset('resources/images/favicon.png')}}"/>
+    <link rel="shortcut icon" type="image/png" href="{{asset('resources/admin/images/favicon.png')}}"/>
     <!-- Bootstrap -->
     <link href="{{asset('resources/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
@@ -52,7 +52,7 @@
                     <!-- menu profile quick info -->
                     <div class="profile">
                         <div class="profile_pic">
-                            <img src="{{asset('resources/images/user2.png')}}" alt="usuário" class="img-circle profile_img">
+                            <img src="{{asset('resources/admin/images/user2.png')}}" alt="usuário" class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Bem vindo,</span>
@@ -79,9 +79,8 @@
                                     <ul class="nav child_menu">
                                         <li><a href="{{route('configuracoes.edit', ['id' => 1])}}">Horário de atendimento</a></li>
                                         <li><a href="{{route('configuracoes-contato.edit', ['id' => 1])}}">E-mail de contato</a></li>
-                                        <li><a href="{{route('configuracoes-home.edit', ['id' => 1])}}">Texto da página inicial</a></li>
-                                        <li><a href="{{route('configuracoes-quem-somos.edit', ['id' => 1])}}">Texto da página quem somos</a></li>
-                                        <li><a href="{{route('configuracoes-orientacao.edit', ['id' => 1])}}">Texto da página orientação ao paciente</a></li>
+                                        <li><a href="{{route('configuracoes-quem-somos.edit', ['id' => 1])}}">Texto da seção Sobre</a></li>
+                                        <li><a href="{{route('configuracoes-orientacao.edit', ['id' => 1])}}">Texto da seção Orientações</a></li>
                                        
                                     </ul>
                                 </li>
@@ -120,7 +119,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{asset('resources/images/user2.png')}}" alt="">{{ Auth::user()->firstName() }}
+                                    <img src="{{asset('resources/admin/images/user2.png')}}" alt="">{{ Auth::user()->firstName() }}
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">

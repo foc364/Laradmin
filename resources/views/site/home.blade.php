@@ -40,6 +40,7 @@
 <body>
 <div class="topbar animated fadeInLeftBig"></div>
 
+<!-- Header -->
 @include('site.partials.header')
 
 <!-- Home -->
