@@ -17,5 +17,6 @@ class Place extends Model
         'address',
         'phone',
         'phone_2',
+        'city',
     ];
 }

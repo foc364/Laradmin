@@ -31,7 +31,7 @@ class SiteController extends Controller
             'healthInsurances' => HealthInsurance::pluck('name', 'name'),
             'config' => $config,
             'phoneNumber' => new PhoneNumber,
-            'places' => Place::all(),
+            'places' => Place::where('active', 1)->get(),
         ];
 
         return view('site.home')->with($params);

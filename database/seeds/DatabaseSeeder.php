@@ -48,18 +48,20 @@ Os exercícios físicos são importantíssimos, porque também atuam diretamente
 
         $place = new Place;
 
-        $place->name = 'Santana';
+        $place->name = 'Consultório Santana';
         $place->phone = '1122391670';
         $place->phone_2 = '1122391805';
         $place->address = 'Rua Voluntários da Pátria, 654, cj 807';
+        $place->city = 'São Paulo - SP';
         $place->active = 1;
         $place->save();
 
         $place2 = new Place;
 
-        $place2->name = 'São Caetano';
+        $place2->name = 'Consultório São Caetano';
         $place2->phone = '1142261890';
         $place2->address = 'Avenida Senador Roberto Simonsen, 832';
+        $place2->city = 'São Caetano Do Sul - SP';
         $place2->active = 1;
         $place2->save();
 

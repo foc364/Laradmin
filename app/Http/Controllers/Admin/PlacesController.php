@@ -60,6 +60,7 @@ class PlacesController extends Controller
             'name' => 'required|max:100',
             'phone' => 'nullable|numeric',
             'phone_2' => 'nullable|numeric',
+            'city' => 'nullable|max:40',
         ]);
 
         $place = Place::create([
@@ -67,6 +68,7 @@ class PlacesController extends Controller
             'phone' => $request->input('phone'),
             'phone_2' => $request->input('phone_2'),
             'address' => $request->input('address'),
+            'city' => $request->input('city'),
         ]);
 
         return redirect()->route('consultorios.index')->with('success', "Consultório <strong>$place->name</strong> foi criado com sucesso.");
@@ -119,6 +121,7 @@ class PlacesController extends Controller
 	            'name' => 'required|max:100',
                 'phone' => 'nullable|numeric',
                 'phone_2' => 'nullable|numeric',
+                'city' => 'nullable|max:40',
 	        ]);
 
             $place = Place::findOrFail($id);
@@ -128,6 +131,7 @@ class PlacesController extends Controller
             $place->phone_2 = $request->input('phone_2');
             $place->address = $request->input('address');
             $place->active = $request->input('active');
+            $place->city = $request->input('city');
             $place->save();
 
             return redirect()->route('consultorios.index')->with('success', "Consultório <strong>$place->name</strong> foi alterado com sucesso.");

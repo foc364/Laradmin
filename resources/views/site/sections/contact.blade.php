@@ -14,9 +14,9 @@
             @endif          
         @endif
         <div class="col-sm-4 {{ $cols }} contact wowload fadeInLeft">
-            <p><b>Consultório {{ $pĺace->name }}</b></p>
+            <p><b>{{ $pĺace->name }}</b></p>
             <i class="fa fa-map-marker" aria-hidden="true"></i> {{ $pĺace->address }}<br />
-            {{ $pĺace->city }}<br />
+            &nbsp;&nbsp;&nbsp;{{ $pĺace->city }}<br /><br />
             <i class="fa fa-phone-square"></i>  {{ $phoneNumber->displayPhoneFormatted($pĺace->phone) }}<br />
             @if ($pĺace->phone_2)
                 <i class="fa fa-phone-square"></i>  {{ $phoneNumber->displayPhoneFormatted($pĺace->phone_2) }}

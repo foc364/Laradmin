@@ -8,15 +8,16 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Consultórios </h2>
+                    <h2>Consultórios <a href="{{route('consultorios.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Criar novo </a></h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>Consultório</th>
+                                <th>Nome</th>
                                 <th>Ativo</th>
+                                <th>Cidade</th>
                                 <th>Endereço</th>
                                 <th>Telefone Principal</th>
                                 <th>Telefone Secundário</th>
@@ -25,8 +26,9 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Consultório</th>
+                                <th>Nome</th>
                                 <th>Ativo</th>
+                                <th>Cidade</th>
                                 <th>Endereço</th>
                                 <th>Telefone Principal</th>
                                 <th>Telefone Secundário</th>
@@ -39,6 +41,7 @@
                             <tr>
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->active ? 'Sim' :'Não'}}</td>
+                                <td>{{$row->city}}</td>
                                 <td>{{$row->address}}</td>
                                 <td>{{$phoneNumber->displayPhoneFormatted($row->phone)}}</td>
                                 <td>{{$phoneNumber->displayPhoneFormatted($row->phone_2)}}</td>

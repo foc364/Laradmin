@@ -12,6 +12,7 @@ class CreateTablePlaces extends Migration
             $table->increments('id');
             $table->tinyInteger('active')->default(1);
             $table->string('name');
+            $table->string('city')->nullable();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('phone_2')->nullable();

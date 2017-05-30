@@ -15,7 +15,7 @@
                     <form method="post" action="{{ route('consultorios.store') }}" data-parsley-validate class="form-horizontal form-label-left">
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-6" for="name">Consultório <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6" for="name">Nome <span class="required">* :</span>
                             </label>
                             <div class="col-md-3 col-sm-3 col-xs-6">
                                 <input type="text" maxlength="100" minlength="4" value="{{ Request::old('name') ?: '' }}" id="name" name="name" class="form-control" required>
@@ -37,12 +37,24 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('phone_2') ? ' has-error' : '' }}">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone_2">Telefone Secundário 
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone_2">Telefone Secundário :
                             </label>
                             <div class="col-md-3 col-sm-3 col-xs-6">
                                 <input type="text" class="form-control col-md-7 col-xs-12 input-medium bfh-phone" data-format=" (dd) dddd-dddd" value="{{ Request::old('phone_2') ?: '' }}" id="phone_2" name="phone_2">
                                 @if ($errors->has('phone_2'))
                                 <span class="help-block">{{ $errors->first('phone_2') }}</span>
+                                @endif
+                            </div>
+                        </div>
+
+
+                        <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6" for="name">Cidade <span class="required"> :</span>
+                            </label>
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <input type="text" maxlength="40" minlength="2" value="{{ Request::old('city') ?: '' }}" id="city" name="city" class="form-control" >
+                                @if ($errors->has('city'))
+                                <span class="help-block">{{ $errors->first('city') }}</span>
                                 @endif
                             </div>
                         </div>
