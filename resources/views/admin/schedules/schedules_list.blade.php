@@ -38,7 +38,7 @@
                         <tfoot>
                             <tr>
                                 <th>Paciente</th>
-                                <th>Telefone</th>
+                                <th>Telefone Principal</th>
                                 <th>Telefone Secundário</th>
                                 <th>E-mail</th>
                                 <th>Horário</th>
