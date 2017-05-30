@@ -26,6 +26,7 @@
                         <thead>
                             <tr>
                                 <th>Paciente</th>
+                                <th>Tipo</th>
                                 <th>Telefone Principal</th>
                                 <th>Telefone Secundário</th>
                                 <th>E-mail</th>
@@ -38,6 +39,7 @@
                         <tfoot>
                             <tr>
                                 <th>Paciente</th>
+                                <th>Tipo</th>
                                 <th>Telefone Principal</th>
                                 <th>Telefone Secundário</th>
                                 <th>E-mail</th>
@@ -52,10 +54,11 @@
                             @foreach($schedules as $row)
                             <tr>
                                 <td>{{$row->name}}</td>
+                                <td>@lang('enums.'.$row->type)</td>
                                 <td>{{$phoneNumber->displayPhoneFormatted($row->phone)}}</td>
                                 <td>{{$phoneNumber->displayPhoneFormatted($row->phone_2)}}</td>
                                 <td>{{$row->email}}</td>
-                                <td>{{Carbon::createFromFormat('Y-m-d H:i:s', $row->date)->format('H:i')}}</td>
+                                <td>{{str_replace(['"', '[', ']', ','], ['', '', '', ', '], $row->time)}}</td>
                                 <td>{{$places->get($row->place_id)}}</td>
                                 <td>{{$healthInsurances->get($row->health_insurance_id)}}</td>
                                 <td>

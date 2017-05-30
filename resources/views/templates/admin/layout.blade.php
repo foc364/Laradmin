@@ -30,11 +30,13 @@
     <link href="{{asset('resources/css/fixedHeader.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('resources/css/responsive.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('resources/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
-
+    <!-- DatePicker -->
     <link href="{{asset('resources/date_picker/css/bootstrap-datepicker3.css')}}" rel="stylesheet">
     <link href="{{asset('resources/date_picker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet">
     <link href="{{asset('resources/date_picker/css/bootstrap-datepicker3.standalone.css')}}" rel="stylesheet">
     <link href="{{asset('resources/date_picker/css/bootstrap-datepicker3.standalone.min.css')}}" rel="stylesheet">
+    <!-- Multselect -->
+    <link rel="stylesheet" href="{{asset('resources/css/bootstrap-multiselect.css')}}">
 
 </head>
 
@@ -162,16 +164,15 @@
     <script src="{{asset('resources/js/jszip.min.js')}}"></script>
     <script src="{{asset('resources/js/pdfmake.min.js')}}"></script>
     <script src="{{asset('resources/js/vfs_fonts.js')}}"></script>
-   
+    <!-- PhoneHelper -->
     <script src="{{asset('resources/form_helper/js/bootstrap-formhelpers-phone.js')}}"></script>
-
+    <!-- DatePicker -->
     <script src="{{asset('resources/date_picker/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('resources/date_picker/js/bootstrap-datepicker.min.js')}}"></script>
     <script src="{{asset('resources/date_picker/js/bootstrap-datepicker.pt-BR.min.js')}}"></script>
-
     <script src="{{asset('resources/js/custom.min.js')}}"></script>
-
-
+    <!-- Multselect -->
+    <script type="text/javascript" src="{{asset('resources/js/bootstrap-multiselect.js')}}"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="{{asset('resources/js/date_helper/date.js')}}"></script>

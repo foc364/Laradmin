@@ -58,5 +58,12 @@ Route::post('site-requests', function (Request $request) {
 
     return $controller->callAction($request->action, [$request]);
 });
+
+Route::post('admin-requests', function (Request $request) {
+    $app = app();
+    $controller = $app->make('Larashop\Http\Controllers\Admin\RequestsController');
+
+    return $controller->callAction($request->action, [$request]);
+});
 //////////////////**REQUISIÇÕES**///////////////
 

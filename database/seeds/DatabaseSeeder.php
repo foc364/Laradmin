@@ -32,13 +32,17 @@ class DatabaseSeeder extends Seeder
 
         $config->time = json_encode($schedule->schedules);
         $config->contact_email = 'contato@preseme.com.br';
-        $config->text_home = 'Cardiologistas com mais de 30 anos de experiencia, atualizados e participantes de Gongressos médicos,nacionais e internecionais com titulo de especialista pela ASSOCIAÇAO MEDICA BRASILEIRA E SOCIEDADE BRASILEIRA DE CARDIOLOGIA.
+        $config->text_about = '<p>Cardiologistas com mais de 30 anos de experiencia, atualizados e participantes de Gongressos médicos,nacionais e internecionais com titulo de especialista pela ASSOCIAÇAO MEDICA BRASILEIRA E SOCIEDADE BRASILEIRA DE CARDIOLOGIA.</p>
 
-            Tratamos de todas patologias que envolvem o sistema cardiovascular, principalmente a insuficiência cardíaca.';
+            <p>Tratamos de todas patologias que envolvem o sistema cardiovascular, principalmente a insuficiência cardíaca.</p>';
 
-        $config->text_about = $config->text_orientation = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tempus consectetur risus tincidunt aliquam. Sed mattis ligula bibendum quam consequat, vel dapibus purus mattis. Curabitur posuere massa ut nibh volutpat dapibus. Vestibulum condimentum nulla sed porttitor varius. Mauris eget dolor justo. Quisque et purus arcu. Nam tristique nunc ac felis euismod porttitor. In in pharetra ligula. Morbi non hendrerit libero. Nulla a fringilla erat, sed aliquam diam.
+        $config->text_orientation = '<p>
+Os exercícios físicos são importantíssimos, porque também atuam diretamente em três fatores de risco: ajudam a manter o peso adequado, são essenciais no tratamento da diabetes, pois reduzem a resistência à insulina e podem auxiliar no tratamento da pressão alta. Porém, é necessário um programa de atividade física eficaz, sem interrupções por qualquer motivo fútil (hoje chove, amanhã faz frio, semana que vem tenho compromisso…).
+</p>
 
-Curabitur aliquam lectus efficitur erat laoreet faucibus. Ut ornare, libero ut ornare auctor, arcu sapien gravida dolor, in ultrices lorem lorem a urna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc at neque luctus dui tristique mattis sit amet quis mauris. Vivamus leo nunc, vehicula vitae hendrerit viverra, faucibus non purus. Curabitur sed eros dictum, pellentesque augue nec, porta felis. Nunc non tincidunt nisl.';
+<p>
+É algo que deve ser assumido como qualquer outro habito na nossa vida. E importante: adaptar o exercício a nossa condição física: pouco efeito terá uma pessoa com problema de joelho tentar praticar corrida ou alguém com doença do quadril tentar jogar futebol. É desistência na certa. Se tenho problema de coluna porque não praticar pilates associado a natação. Se a musculação me parece repetitiva porque não tentar uma arte marcial ou esporte de luta?
+</p>';
 
         $config->save();
 

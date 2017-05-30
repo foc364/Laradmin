@@ -15,13 +15,15 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
+            $table->enum('type', array_keys(Config::get('enums.schedules.type')));
             $table->integer('place_id')->unsigned();
             $table->integer('health_insurance_id')->unsigned();
             $table->string('name');
             $table->string('phone')->nullable();
             $table->string('phone_2')->nullable();
             $table->string('email')->nullable();
-            $table->dateTime('date');
+            $table->date('date');
+            $table->text('time');
             $table->timestamps();
             $table->softDeletes();
         });

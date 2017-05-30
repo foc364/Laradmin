@@ -13,6 +13,7 @@ use Larashop\Formatters\PhoneNumber;
 use Larashop\Formatters\DateFormatter;
 use Carbon;
 use DB;
+use Lang;
 
 class SchedulesController extends Controller
 {
@@ -24,6 +25,7 @@ class SchedulesController extends Controller
      */
     public function index(Request $request)
     {
+
     	$date = $request->input('date') ?: Carbon::now()->format('d/m/Y');
     	$date = Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
     	
@@ -90,7 +92,9 @@ class SchedulesController extends Controller
             'phone_2' => $request->input('phone_2'),
             'health_insurance_id' => $request->input('healthInsurance'),
             'place_id' => $request->input('place'),
-            'date' => (new DateFormatter)->MakeDateTime($request->input('date'), $request->input('time')),
+            'date' => (new DateFormatter)->BrToDefaultDate($request->input('date')),
+            'time' => json_encode($request->input('time')),
+            'type' => $request->input('type'),
         ]);
 
         return redirect()->route('agendamentos.index')->with('success', "Agendamento <strong>$schedule->name</strong> foi criado com sucesso.");

@@ -3,7 +3,7 @@
   <div class="row">
   <div class="col-sm-6 wowload fadeInLeft">
     <h4> Apresentação</h4>
-    <?php print $config->text_home ?>
+    <?php print $config->text_about ?>
   </div>
 
   <div class="col-sm-4 wowload fadeInRight">

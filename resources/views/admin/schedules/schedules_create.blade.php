@@ -14,6 +14,17 @@
                     <br />
                     <form method="post" action="{{ route('agendamentos.store') }}" data-parsley-validate class="form-horizontal form-label-left">
 
+                        <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="places">Tipo <span class="required">* :</span></label>
+                            
+                            <div class="col-md-2 col-sm-2 col-xs-4">
+                               {{ Form::select('type', Config::get('enums.schedules.type'), Request::old('type') ?: 'null', ['class' => 'form-control', 'id' => 'type']) }}
+                                @if ($errors->has('type'))
+                                <span class="help-block">{{ $errors->first('type') }}</span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label class="control-label col-md-3 col-sm-3 col-xs-8" for="name">Paciente <span class="required">* :</span>
                             </label>
@@ -85,7 +96,7 @@
                             </label>
                             <div class="input-group date col-md-2 col-sm-2 col-xs-4">
                                 <span class="input-group-addon" ><i class="glyphicon glyphicon-calendar"></i></span>
-                                <input type="text" class="form-control form-group" name="date" value="{{ Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now())->format('d/m/Y') }}">
+                                <input type="text" class="form-control form-group" name="date" id="date" value="{{ Request::old('date') ?: Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now())->format('d/m/Y') }}">
                             </div>
                         </div>
 
@@ -93,7 +104,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="time">Horário: <span class="required">* :</span>
                             </label>
                             <div class="col-md-2 col-sm-2 col-xs-4">
-                               {{ Form::select('time', $time, Request::old('time') ?: 'null', ['class' => 'form-control', 'placeholder' => 'Selecione..']) }}
+                               {{ Form::select('time[]', $time, Request::old('time') ?: 'null', ['class' => 'form-control', 'id' => 'time', 'multiple' => 'multiple']) }}
                                 @if ($errors->has('time'))
                                 <span class="help-block">{{ $errors->first('time') }}</span>
                                 @endif
@@ -124,6 +135,59 @@
             todayHighlight: true,
             autoclose: true,
         });
+
+        /***** Quando troca a data ******/
+        $('#sandbox-container .input-group.date').datepicker().on('changeDate', function(e) {
+            var parameters = {
+              action: 'getAvailableSchedule',
+              date: $('#date').val()
+            };
+
+            $.ajax({
+              type: 'POST',
+              url: '../../admin-requests',
+              data: parameters,
+              dataType: 'json',
+              success: function (data) {
+                $('#time').multiselect('rebuild');
+                $('#time').empty().append(data);
+                $('#time').multiselect('rebuild');
+
+              },
+              error: function (data) {
+                console.log('Error:', data);
+              }
+            });
+        });
+        /***** Quando troca a data ******/
+
+        $('#time').multiselect({
+            maxHeight: 200,
+            nonSelectedText: 'Selecione..',
+            nSelectedText: ' - Selecionados'
+        });
+
+        var parameters = {
+          action: 'getAvailableSchedule',
+          date: $('#date').val()
+        };
+
+        $.ajax({
+          type: 'POST',
+          url: '../../admin-requests',
+          data: parameters,
+          dataType: 'json',
+          success: function (data) {
+            $('#time').multiselect('rebuild');
+            $('#time').empty().append(data);
+            $('#time').multiselect('rebuild');
+
+          },
+          error: function (data) {
+            console.log('Error:', data);
+          }
+        });
+         
     });
 </script>
 @stop

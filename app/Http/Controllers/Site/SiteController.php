@@ -43,32 +43,7 @@ class SiteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-/*
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required|max:100',
-            'email' => 'email',
-            'phone' => 'required',
-            'date' => 'required',
-            'place' => 'required',
-            'health_insurance' => 'required',
-            'schedule' => 'required',
-        ]);
 
-        $beautymail = app()->make(Beautymail::class);
-
-        $beautymail->send('emails.welcome', $request->all(), function($message) {
-
-        $message
-            ->from('site@preseme.com.br')
-            ->to('contato@preseme.com.br', 'John Smith')
-            ->subject('Agendamento de consulta');
-        });
-
-        return redirect()->route('contato.index')->with('success', "E-mail enviado com sucesso.");
-    }
-*/
     public function getAvailableSchedule(Request $request)
     {
         $schedules = (new Schedule)->getScheduleAvailableOptionFormat($request->date);
