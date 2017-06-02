@@ -83,6 +83,7 @@ class SchedulesController extends Controller
             'healthInsurance' => 'required',
             'date' => 'required',
             'time' => 'required',
+            'observation' => 'nullable|max:400',
         ]);
 
         $schedule = Schedule::create([
@@ -95,6 +96,7 @@ class SchedulesController extends Controller
             'date' => (new DateFormatter)->BrToDefaultDate($request->input('date')),
             'time' => json_encode($request->input('time')),
             'type' => $request->input('type'),
+            'observation' => $request->input('observation'),
         ]);
 
         return redirect()->route('agendamentos.index')->with('success', "Agendamento <strong>$schedule->name</strong> foi criado com sucesso.");

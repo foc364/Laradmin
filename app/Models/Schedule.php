@@ -28,6 +28,7 @@ class Schedule extends Model
         'email',
         'date',
         'time',
+        'observation',
     ];
 
     public $schedules = [

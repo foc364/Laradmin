@@ -7,7 +7,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>{{ $title }} da página 'orientação ao paciente'</h2>
+                    <h2>{{ $title }} da seção 'Orientação ao paciente'</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -15,7 +15,7 @@
                     <form method="post" action="{{ route('configuracoes-orientacao.update', ['id' => 1]) }}" data-parsley-validate class="form-horizontal form-label-left">
 
                         <div class="form-group{{ $errors->has('text_orientation') ? ' has-error' : '' }}">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-6" for="text_orientation"><p>Texto da página 'orientação ao paciente' :</p>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6" for="text_orientation"><p>Texto da seção 'Orientação ao paciente' :</p>
                                 <samp>
                                     <p>Usar as tags {{ '<p>' }} e {{ '</p>' }} para quebra de linha</p>
                                 </samp>

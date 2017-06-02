@@ -16,7 +16,7 @@
                         <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>Ativo</th>
+                                <th>Ativo <i class="glyphicon glyphicon-question-sign"  data-toggle="tooltip" data-placement="top" title="Se estiver 'Sim' então o consultório está funcionando e o cliente poderá agendar uma consulta nele."></i></th>
                                 <th>Cidade</th>
                                 <th>Endereço</th>
                                 <th>Telefone Principal</th>

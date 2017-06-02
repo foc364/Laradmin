@@ -16,7 +16,7 @@
                         <thead>
                             <tr>
                                 <th>Convênio</th>
-                                <th>Ativo</th>
+                                <th>Ativo <i class="glyphicon glyphicon-question-sign"  data-toggle="tooltip" data-placement="top" title="Se estiver 'Sim' então o convênio está ativo e o cliente poderá agendar uma consulta usando ele."></i></th>
                                 <th>Ação</th>
                             </tr>
                         </thead>
@@ -34,7 +34,7 @@
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->active ? 'Sim' :'Não'}}</td>
                                 <td>
-                                    <a href="{{ route('convenios.edit', ['id' => $row->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Alterar"></i> </a>
+                                    <a href="{{ route('convenios.edit', ['id' => $row->id]) }}" class="btn btn-info btn-xs" ><i class="fa fa-pencil" title="Alterar"></i> </a>
                                 </td>
                             </tr>
                             @endforeach

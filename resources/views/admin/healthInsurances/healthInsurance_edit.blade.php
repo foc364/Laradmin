@@ -15,9 +15,9 @@
                     <form method="post" action="{{ route('convenios.update', ['id' => $healthInsurance->id]) }}" data-parsley-validate class="form-horizontal form-label-left">
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-6" for="name">Convênio <span class="required">* :</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Convênio <span class="required">* :</span>
                             </label>
-                            <div class="col-md-3 col-sm-3 col-xs-6">
+                            <div class="col-md-4 col-sm-6 col-xs-12">
                                 <input type="text" maxlength="100" minlength="4" value="{{ Request::old('name') ?: $healthInsurance->name }}" id="name" name="name" class="form-control" required>
                                 @if ($errors->has('name'))
                                 <span class="help-block">{{ $errors->first('name') }}</span>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('active') ? ' has-error' : '' }}">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-6" for="active">Ativo :</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6" for="active">Ativo <i class="glyphicon glyphicon-question-sign"  data-toggle="tooltip" data-placement="top" title="Se estiver 'Sim' então o convênio está ativo e o cliente poderá agendar uma consulta usando ele."></i>:</label>
 
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <label class="radio-inline">

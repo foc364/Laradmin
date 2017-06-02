@@ -14,7 +14,7 @@
                 <div class="x_content" id="sandbox-container">
                     <form method="get" action="{{ route('agendamentos.index') }}" data-parsley-validate class="form-horizontal form-label-left" name="filter" id="filter">
                         <label>Data da consulta</label>
-                        <div class="input-group date col-md-2 col-sm-2 col-xs-4" >
+                        <div class="input-group date col-md-3 col-sm-3 col-xs-8" >
                             <span class="input-group-addon" ><i class="glyphicon glyphicon-calendar"></i></span>
                             <input type="text" name="date" class="form-control form-group" value="{{ Request::input('date') ?: Carbon::now()->format('d/m/Y') }}">
                         </div>
@@ -26,13 +26,14 @@
                         <thead>
                             <tr>
                                 <th>Paciente</th>
-                                <th>Tipo</th>
+                                <th>Tipo <i class="glyphicon glyphicon-question-sign"  data-toggle="tooltip" data-placement="top" title="Colocar 'Reservado' quando for para ocupar o horario com qualquer coisa menos consulta ex. Sair mais cedo, compromisso etc.."</th>
                                 <th>Telefone Principal</th>
                                 <th>Telefone Secundário</th>
                                 <th>E-mail</th>
                                 <th>Horário</th>
                                 <th>Consultório</th>
                                 <th>Convênio</th>
+                                <th>Observação</th>
                                 <th>Ação</th>
                             </tr>
                         </thead>
@@ -46,6 +47,7 @@
                                 <th>Horário</th>
                                 <th>Consultório</th>
                                 <th>Convênio</th>
+                                <th>Observação</th>
                                 <th>Ação</th>
                             </tr>
                         </tfoot>
@@ -61,6 +63,7 @@
                                 <td>{{str_replace(['"', '[', ']', ','], ['', '', '', ', '], $row->time)}}</td>
                                 <td>{{$places->get($row->place_id)}}</td>
                                 <td>{{$healthInsurances->get($row->health_insurance_id)}}</td>
+                                <td>{{$row->observation}}</td>
                                 <td>
                                     <a href="{{ route('agendamentos.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Excluir"></i> </a>
                                 </td>

@@ -15,7 +15,7 @@
                     <form method="post" action="{{ route('configuracoes.update', ['id' => 1]) }}" data-parsley-validate class="form-horizontal form-label-left">
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-6" for="name">Horários de Atendimento :
+                            <label class="control-label col-md-3 col-sm-4 col-xs-12" for="name">Horários de Atendimento <i class="glyphicon glyphicon-question-sign"  data-toggle="tooltip" data-placement="top" title="Horário em que o médico trabalha."></i>:
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 @foreach ($schedules as $schedule)
