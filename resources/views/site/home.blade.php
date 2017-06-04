@@ -28,12 +28,6 @@
 
 <link rel="stylesheet" href="resources/site/style.css">
 
-<!-- DatePicker -->
-<link rel="stylesheet" href="resources/date_picker/css/bootstrap-datepicker3.css">
-<link rel="stylesheet" href="resources/date_picker/css/bootstrap-datepicker3.min.css">
-<link rel="stylesheet" href="resources/date_picker/css/bootstrap-datepicker3.standalone.css">
-<link rel="stylesheet" href="resources/date_picker/css/bootstrap-datepicker3.standalone.min.css">
-
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 
@@ -80,17 +74,12 @@
 <!-- custom script -->
 <script src="resources/site/script.js"></script>
 
-<!-- datepicker -->
-<script src="resources/date_picker/js/bootstrap-datepicker.js"></script>
-<script src="resources/date_picker/js/bootstrap-datepicker.min.js"></script>
-<script src="resources/date_picker/js/bootstrap-datepicker.pt-BR.min.js"></script>
-<script src="resources/js/date_helper/date.js"></script>
 
 <!-- mask -->
 <script src="resources/site/js/jquery-mask-plugin/src/jquery.mask.js"></script>
 
 <script>
-  $(document).ready(function(){
+$(document).ready(function(){
   var maskBehavior = function (val) {
     return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
   },
@@ -99,76 +88,30 @@
     }
   };
 
-  $('#phone').mask(maskBehavior, options);
-  $('#date').mask('00/00/0000');
-
-  $('#sandbox-container input').datepicker({
-    format: "dd/mm/yyyy",
-    todayBtn: "linked",
-    language: "pt-BR",
-    daysOfWeekDisabled: "0,6",
-    startDate: brToday(),
-    endDate: somaDate(60),
-    todayHighlight: true,
-    autoclose: true,
-  });
-
-  $("#place").on("change", function(e) {
-    if ($('#place').val()) {
-      $('#date').attr('disabled', false);
-      $('#health_insurance').attr('disabled', false);
-    }
-  });
-
-/***** Quando troca a data ******/
-  $('#sandbox-container input').datepicker().on('changeDate', function(e) {
+  $('.phone').mask(maskBehavior, options);
+  
+  $('#form_contact').submit(function( event ) {
     var parameters = {
-      action: 'getAvailableSchedule',
-      date: $('#date').val()
+      action: 'sendEmail',
+      form: $('#form_contact').serializeArray()
     };
 
     $.ajax({
-      type: 'POST',
-      url: 'site-requests',
-      data: parameters,
-      dataType: 'json',
-      success: function (data) {
-        $('#schedule').attr('disabled', false);
-        $('#schedule').empty().append(data);
-      },
-      error: function (data) {
-        console.log('Error:', data);
-      }
+        type: 'POST',
+        url: 'site-requests',
+        data: parameters,
+        dataType: 'json',
+        success: function (data) {
+          $('#msg_email').html(data).fadeIn('slow');
+          $("#form_contact")[0].reset();
+        },
+        error: function (data) {
+          console.log('Error:', data);
+        }
     });
+
+    event.preventDefault();
   });
-/***** Quando troca a data ******/
-
-$('#form_contact').submit(function( event ) {
-  var parameters = {
-    action: 'sendEmail',
-    form: $('#form_contact').serializeArray()
-  };
-
-  $.ajax({
-      type: 'POST',
-      url: 'site-requests',
-      data: parameters,
-      dataType: 'json',
-      success: function (data) {
-        $('#msg_email').html(data).fadeIn('slow');
-        $("#form_contact")[0].reset();
-      },
-      error: function (data) {
-        console.log('Error:', data);
-      }
-  });
-
-
-  event.preventDefault();
-});
-
-
- 
 });
 </script>
 

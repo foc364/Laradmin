@@ -20,12 +20,13 @@ class ConfigsOrientationController extends Controller
         try
         {
             $config = Config::findOrFail($id);
-
-            $text_orientation_old = $config->text_orientation;
        
             $params = [
                 'title' => 'Configurações',
-                'text_orientation_old' => $text_orientation_old,
+                'text_orientation' => $config->text_orientation,
+                'text_orientation_1' => $config->text_orientation_1,
+                'text_orientation_2' => $config->text_orientation_2,
+                'text_orientation_3' => $config->text_orientation_3,
             ];
 
             return view('admin.configsOrientation.configsOrientation_edit')->with($params);
@@ -53,6 +54,9 @@ class ConfigsOrientationController extends Controller
             $config = Config::findOrFail($id);
           
             $config->text_orientation = $request->input('text_orientation');
+            $config->text_orientation_1 = $request->input('text_orientation_1');
+            $config->text_orientation_2 = $request->input('text_orientation_2');
+            $config->text_orientation_3 = $request->input('text_orientation_3');
             $config->save();
 
             return redirect()->route('configuracoes-orientacao.edit', ['id' => 1])->with('success', "Configurações foram alteradas com sucesso.");

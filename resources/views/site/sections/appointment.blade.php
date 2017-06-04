@@ -27,7 +27,20 @@
         </div>
         <div class="col-sm-3  col-xs-12">      
           <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-            <input id="phone" type="text" name="phone" class="form-control input-sm" placeholder="Telefone" value="{{ $request->phone ?: '' }}" required >
+            <input id="phone" type="text" name="phone" class="phone form-control input-sm" placeholder="Telefone Fixo" value="{{ $request->phone ?: '' }}">
+          </div>
+        </div>
+      </div>
+
+      <div class="row wowload fadeInLeftBig">  
+        <div class="col-sm-3 col-sm-offset-3 col-xs-12">    
+          <div class="form-group{{ $errors->has('cel') ? ' has-error' : '' }}">
+            <input id="cellphone" type="text" name="cellphone" class="phone form-control input-sm" placeholder="Celular" value="{{ $request->cellphone ?: '' }}" >
+          </div>
+        </div>
+        <div class="col-sm-3  col-xs-12">      
+          <div class="form-group{{ $errors->has('whatsapp') ? ' has-error' : '' }}">
+            <input id="whatsapp" type="text" name="whatsapp" class="phone form-control input-sm" placeholder="WhatsApp" value="{{ $request->whatsapp ?: '' }}"  >
           </div>
         </div>
       </div>
@@ -41,19 +54,6 @@
         <div class="col-sm-3  col-xs-12">      
           <div class="form-group{{ $errors->has('health_insurance') ? ' has-error' : '' }}">
             {{ Form::select('health_insurance', $healthInsurances, $request->health_insurance ?: 'null', ['class' => 'form-control input-sm', 'placeholder' => 'Convênio / Particular', 'id' => 'health_insurance', 'required' => 'required'] )}}
-          </div>
-        </div>
-      </div>
-
-      <div class="row wowload fadeInLeftBig">  
-        <div class="col-sm-3 col-sm-offset-3 col-xs-12" id="sandbox-container">      
-          <div class="form-group input-group date">
-            <input type="text" placeholder="Data" class="form-control form-group input-sm" name="date" id="date" value="{{ $request->date ?: 'null' }}" required >
-          </div>
-        </div>
-        <div class="col-sm-3  col-xs-12">      
-          <div class="form-group{{ $errors->has('schedule') ? ' has-error' : '' }}">
-             {{ Form::select('schedule', $schedules, $request->schedule ?: 'null', ['class' => 'form-control input-sm', 'placeholder' => 'Horário', 'id' => 'schedule', 'disabled' => 'disabled', 'required' => 'required']) }}
           </div>
         </div>
       </div>

@@ -15,6 +15,9 @@ class Config extends Model
         'time',
         'text_home',
         'text_orientation',
+        'text_orientation_1',
+        'text_orientation_2',
+        'text_orientation_3',
         'text_about',
         'contact_email',
     ];

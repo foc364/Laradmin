@@ -53,6 +53,8 @@ class SiteController extends Controller
 
     public function sendEmail(Request $request) 
     {
+        $config = Config::find(1);
+
         foreach ($request->form as $fields) {
             $request->request->add([ $fields['name'] => $fields['value'] ]);
         }
@@ -63,20 +65,15 @@ class SiteController extends Controller
         $this->validate($request, [
             'name' => 'required|max:100',
             'email' => 'email',
-            'phone' => 'required',
-            'date' => 'required',
-            'place' => 'required',
-            'health_insurance' => 'required',
-            'schedule' => 'required',
         ]);
 
         $beautymail = app()->make(Beautymail::class);
 
-        $beautymail->send('emails.welcome', $request->all(), function($message) {
+        $beautymail->send('emails.welcome', $request->all(), function($message) use ($config) {
 
         $message
             ->from('site@preseme.com.br')
-            ->to('contato@preseme.com.br', 'John Smith')
+            ->to( $config->contact_email, '')
             ->subject('Agendamento de consulta');
         });
 

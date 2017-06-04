@@ -21,9 +21,47 @@
                                 </samp>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                             {!! Form::textarea('text_orientation', Request::old('text_orientation') ?: $text_orientation_old , ['id' => 'text_orientation', 'rows' => 15, 'cols' => 54, 'style' => 'resize:yes', 'class'=>'form-control']) !!}
+                             {!! Form::textarea('text_orientation', $text_orientation ?:  Request::old('text_orientation') , ['id' => 'text_orientation', 'rows' => 15, 'cols' => 54, 'style' => 'resize:yes', 'class'=>'form-control']) !!}
                             </div>
                         </div>
+
+                        <div class="form-group{{ $errors->has('text_orientation_1') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6" for="text_orientation_1"><p>
+                                <samp>
+                                    <p>Usar as tags {{ '<p>' }} e {{ '</p>' }} para quebra de linha</p>
+                                    <p>Usar as tags {{ '<b>' }} e {{ '</b>' }} para negrito</p>
+                                </samp>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                             {!! Form::textarea('text_orientation_1', $text_orientation_1 ?:  Request::old('text_orientation_1') , ['id' => 'text_orientation_1', 'rows' => 7, 'cols' => 54, 'style' => 'resize:yes', 'class'=>'form-control']) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('text_orientation_2') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6" for="text_orientation_2"><p>
+                                <samp>
+                                    <p>Usar as tags {{ '<p>' }} e {{ '</p>' }} para quebra de linha</p>
+                                    <p>Usar as tags {{ '<b>' }} e {{ '</b>' }} para negrito</p>
+                                </samp>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                             {!! Form::textarea('text_orientation_2', $text_orientation_2 ?:  Request::old('text_orientation_2') , ['id' => 'text_orientation_2', 'rows' => 7, 'cols' => 54, 'style' => 'resize:yes', 'class'=>'form-control']) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('text_orientation_3') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6" for="text_orientation_3"><p>
+                                <samp>
+                                    <p>Usar as tags {{ '<p>' }} e {{ '</p>' }} para quebra de linha</p>
+                                    <p>Usar as tags {{ '<b>' }} e {{ '</b>' }} para negrito</p>
+                                </samp>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                             {!! Form::textarea('text_orientation_3', $text_orientation_3 ?:  Request::old('text_orientation_3') , ['id' => 'text_orientation_3', 'rows' => 7, 'cols' => 54, 'style' => 'resize:yes', 'class'=>'form-control']) !!}
+                            </div>
+                        </div>
+
+                     
 
                         <div class="ln_solid"></div>
 

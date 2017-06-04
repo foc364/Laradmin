@@ -19,6 +19,9 @@ class CreateConfigsTable extends Migration
             $table->text('text_home')->nullable();
             $table->text('text_about')->nullable();
             $table->text('text_orientation')->nullable();
+            $table->text('text_orientation_1')->nullable();
+            $table->text('text_orientation_2')->nullable();
+            $table->text('text_orientation_3')->nullable();
             $table->string('contact_email')->nullable();
             $table->timestamps();
         });

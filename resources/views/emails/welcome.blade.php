@@ -18,22 +18,22 @@
 		</tr>
 		<tr>
 			<td class="paragraph">
-				Telefone - {{ $phone }}
+				Telefone Fixo - {{ $phone }}
+			</td>
+		</tr>
+		<tr>
+			<td class="paragraph">
+				Celular - {{ $cellphone }}
+			</td>
+		</tr>
+		<tr>
+			<td class="paragraph">
+				WhatsApp - {{ $whatsapp }}
 			</td>
 		</tr>
 		<tr>
 			<td class="paragraph">
 				E-mail - {{ $email }}
-			</td>
-		</tr>
-		<tr>
-			<td class="paragraph">
-				Data da consulta - {{ $date }}
-			</td>
-		</tr>
-		<tr>
-			<td class="paragraph">
-				Horário - {{ $schedule }}
 			</td>
 		</tr>
 		<tr>
